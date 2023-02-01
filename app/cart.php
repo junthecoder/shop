@@ -40,34 +40,38 @@ try {
     <div class="row">
       <h3 class="p-3">ショッピングカート</h3>
     </div>
-    <div class="row">
-      <div class="col">
-        <?php foreach ($items as $item): ?>
-        <div class="card">
-          <div class="d-flex justify-content-between">
-            <img src="/images/200x200.png" class="card-img-left" alt="<?= $item['name'] ?>" style="width: 160px; height: 160px">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <h5 class="card-title"><?= $item['name'] ?></h5>
-                <p class="">¥<?= $item['price'] ?></p>
-              </div>
-              <div class="float-end">
-                <form action="cart.php" method="post">
-                  <input type="hidden" name="action" value="delete">
-                  <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
-                  <button type="submit" class="btn btn-danger">削除</button>
-                </form>
+    <?php if (empty($_SESSION['cart'])): ?>
+      <p>カートに商品はありません</p>
+    <?php else: ?>
+      <div class="row">
+        <div class="col">
+          <?php foreach ($items as $item): ?>
+          <div class="card">
+            <div class="d-flex justify-content-between">
+              <img src="/images/200x200.png" class="card-img-left" alt="<?= $item['name'] ?>" style="width: 160px; height: 160px">
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <h5 class="card-title"><?= $item['name'] ?></h5>
+                  <p class="">¥<?= $item['price'] ?></p>
+                </div>
+                <div class="float-end">
+                  <form action="cart.php" method="post">
+                    <input type="hidden" name="action" value="delete">
+                    <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
+                    <button type="submit" class="btn btn-danger">削除</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
+          <?php endforeach ?>
         </div>
-        <?php endforeach ?>
       </div>
-    </div>
-    <div class="row p-3 float-end">
-      <form action="checkout.php" method="post">
-        <button type="submit" class="btn btn-warning py-2">レジに進む</button>
-      </form>
-    </div>
+      <div class="row p-3 float-end">
+        <form action="checkout.php" method="post">
+          <button type="submit" class="btn btn-warning py-2">レジに進む</button>
+        </form>
+      </div>
+    <?php endif ?>
   </div>
 <?php include_template('post_body.php') ?>
