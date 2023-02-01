@@ -56,5 +56,11 @@ if ($_POST['check'] == 1) {
         </div>
       </form>
     <?php endif ?>
+
+    <form class="container px-5" style="width: 350px;" action="register.php" method="post">
+      <div class="row">
+        <input type="submit" class="btn btn-secondary" value="アカウントを作成する">
+      </div>
+    </form>
   </div>
 <?php include_template('post_body.php') ?>
