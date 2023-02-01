@@ -1,5 +1,5 @@
 <?php
-
+require_once('utility.php');
 session_start();
 
 if (isset($_SESSION['user'])) {
