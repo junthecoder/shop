@@ -22,6 +22,7 @@ if ($_POST['check'] == 1) {
 
         if ($success) {
             $_SESSION['user'] = $row;
+            header('Location: index.php');
         }
     } catch (Exception $e) {
         print $e;
@@ -35,8 +36,11 @@ if ($_POST['check'] == 1) {
 <?php include_template('pre_body.php', ['title' => 'ログイン']) ?>
   <div class="container p-5" style="width: 450px;">
     <?php if ($success): ?>
+      <script>
+        setTimeout(() => { document.location = '/'; }, 3000);
+      </script>
       <p>ログインしました</p>
-      <a href="/">トップページへ</a>
+      <p><a href="/">トップページへ</a></p>
     <?php else: ?>
       <form class="container p-5" style="width: 350px;" action="login.php" method="post">
         <div class="row mb-4">
@@ -55,12 +59,11 @@ if ($_POST['check'] == 1) {
           <input type="submit" class="btn btn-primary" value="ログイン">
         </div>
       </form>
+      <form class="container px-5" style="width: 350px;" action="register.php" method="post">
+        <div class="row">
+          <input type="submit" class="btn btn-secondary" value="アカウントを作成する">
+        </div>
+      </form>
     <?php endif ?>
-
-    <form class="container px-5" style="width: 350px;" action="register.php" method="post">
-      <div class="row">
-        <input type="submit" class="btn btn-secondary" value="アカウントを作成する">
-      </div>
-    </form>
   </div>
 <?php include_template('post_body.php') ?>
