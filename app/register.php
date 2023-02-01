@@ -19,7 +19,7 @@ if ($register == 1) {
         $password = 'test';
         $dbh = new PDO($dsn, $user, $password);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
+
         $sql = 'INSERT INTO user (name, email, password) VALUES (?, ?, ?)';
         $stmt = $dbh->prepare($sql);
         $password_hash = password_hash($_POST['password'], PASSWORD_BCRYPT);

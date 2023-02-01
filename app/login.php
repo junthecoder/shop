@@ -12,12 +12,12 @@ if ($_POST['check'] == 1) {
         $password = 'test';
         $dbh = new PDO($dsn, $user, $password);
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
+
         $sql = 'SELECT name, password FROM user WHERE email = ?';
         $stmt = $dbh->prepare($sql);
         $stmt->execute([$_POST['email']]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
         $success = $row !== false and password_verify($_POST['password'], $row['password']);
 
         if ($success) {
@@ -54,7 +54,7 @@ if ($_POST['check'] == 1) {
           <input type="hidden" name="check" value="1">
           <input type="submit" class="btn btn-primary" value="ログイン">
         </div>
-      </form>      
-    <?php endif ?>        
+      </form>
+    <?php endif ?>
   </div>
 <?php include_template('post_body.php') ?>
