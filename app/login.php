@@ -18,7 +18,7 @@ if ($_POST['check'] == 1) {
         $stmt->execute([$_POST['email']]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $success = $row !== false and password_verify($_POST['password'], $row['password']);
+        $success = ($row !== false and password_verify($_POST['password'], $row['password']));
 
         if ($success) {
             $_SESSION['user'] = $row;
