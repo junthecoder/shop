@@ -12,20 +12,9 @@ if (isset($_SESSION['user'])) {
 
 ?>
 
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ログアウト</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  </head>
-  <body>
-    <div class="container p-5" style="width: 450px;">
-      <p>ログアウトしました</p>
-      <a href="/">トップページへ</a>
-    </div>
-  </body>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-</html>
+<?php include_template('pre_body.php', ['title' => 'ログアウト']) ?>
+  <div class="container p-5" style="width: 450px;">
+    <p>ログアウトしました</p>
+    <a href="/">トップページへ</a>
+  </div>
+<?php include_template('post_body.php') ?>
