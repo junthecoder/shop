@@ -10,7 +10,7 @@ if ($_POST['check'] == 1) {
     try {
         $db = new Database;
 
-        $sql = 'SELECT name, password FROM user WHERE email = ?';
+        $sql = 'SELECT id, name, password FROM user WHERE email = ?';
         $stmt = $db->prepare($sql);
         $stmt->execute([$_POST['email']]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);

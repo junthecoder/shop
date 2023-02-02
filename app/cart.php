@@ -55,7 +55,7 @@ try {
       <div class="row">
         <div class="row p-3 float-end">
           <form action="checkout.php" method="post">
-            <input type="hidden" name="action" value="confirm">
+            <input type="hidden" name="action" value="default">
             <button type="submit" class="btn btn-warning py-2">レジに進む</button>
           </form>
         </div>
