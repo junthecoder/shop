@@ -28,11 +28,6 @@ try {
                 break;
         }
     }
-
-    $items = [];
-    foreach ($_SESSION['cart'] as $cart_item) {
-        $items[$cart_item['id']] = $db->get_item_by_id($cart_item['id']);
-    }
 } catch (Exception $e) {
     print $e;
 } finally {
@@ -48,6 +43,7 @@ try {
       event.target.getAttribute('data-itemid');
     }
   </script>
+<?php include_template('pre_body.php', ['title' => 'ショッピングカート']) ?>
   <div class="container m-5">
     <div class="row">
       <h3 class="p-3">ショッピングカート</h3>
@@ -55,52 +51,17 @@ try {
     <?php if (empty($_SESSION['cart'])): ?>
       <p>カートに商品はありません</p>
     <?php else: ?>
+      <?php include_template('cart_items.php', ['deletable' => true, 'count_changeable' => true]) ?>
       <div class="row">
-        <div class="col">
-          <?php foreach ($_SESSION['cart'] as $cart_item): ?>
-            <?php $item = $items[$cart_item['id']]; ?>
-            <div class="card">
-              <div class="d-flex justify-content-between">
-                <img src="/images/200x200.png" class="card-img-left" alt="<?= $item['name'] ?>" style="width: 160px; height: 160px">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between">
-                    <h5 class="card-title"><?= $item['name'] ?></h5>
-                    <p class="">¥<?= $item['price'] * $cart_item['count'] ?></p>
-                  </div>
-                  <form action="cart.php" method="post">
-                    <input type="hidden" name="action" value="change_count">
-                    <input type="hidden" name="item_id" value="<?= $cart_item['id'] ?>">
-                    <select name="count" class="form-select form-select-sm" style="width: 5em" value="<?= $cart_item['count'] ?>" onchange="this.form.submit()">
-                      <?php for ($i = 1; $i <= 10; ++$i): ?>
-                        <option
-                          value="<?= $i ?>"
-                          <?php if ($i == $cart_item['count']): ?>
-                              selected="selected"
-                          <?php endif ?>
-                        >
-                          <?= $i ?>
-                        </option>
-                      <?php endfor ?>
-                    </select>
-                  </form>
-                  <div class="float-end">
-                    <form action="cart.php" method="post">
-                      <input type="hidden" name="action" value="delete">
-                      <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
-                      <button type="submit" class="btn btn-danger">削除</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <?php endforeach ?>
+        <div class="row p-3 float-end">
+          <form action="checkout.php" method="post">
+            <input type="hidden" name="action" value="confirm">
+            <button type="submit" class="btn btn-warning py-2">レジに進む</button>
+          </form>
         </div>
       </div>
-      <div class="row p-3 float-end">
-        <form action="checkout.php" method="post">
-          <button type="submit" class="btn btn-warning py-2">レジに進む</button>
-        </form>
-      </div>
-    <?php endif ?>
-  </div>
+    </div>
+  <?php endif ?>
+</div>
+
 <?php include_template('post_body.php') ?>
