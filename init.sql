@@ -12,6 +12,22 @@ CREATE TABLE user (
     INDEX(email)
 );
 
+CREATE TABLE purchase (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    user_id INT UNSIGNED,
+    purchase_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+CREATE TABLE purchase_item (
+    purchase_id INT UNSIGNED NOT NULL,
+    item_id INT UNSIGNED NOT NULL,
+    count INT UNSIGNED NOT NULL,
+    PRIMARY KEY (purchase_id, item_id),
+    FOREIGN KEY (purchase_id) REFERENCES purchase(id),
+    FOREIGN KEY (item_id) REFERENCES item(id)
+);
+
 # Test items
 INSERT INTO item (name, price) VALUES ('Product #1', 100);
 INSERT INTO item (name, price) VALUES ('Product #2', 200);
