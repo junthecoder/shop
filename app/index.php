@@ -1,18 +1,15 @@
 <?php
 require_once('utility.php');
+require_once('database.php');
 session_start();
 
 try {
-    $dsn = 'mysql:dbname=shop;host=db-1;charset=utf8';
-    $user = 'test';
-    $password = 'test';
-    $dbh = new PDO($dsn, $user, $password);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $items = get_all_items($dbh);
+    $db = new Database;
+    $items = $db->get_all_items();
 } catch (Exception $e) {
     print $e;
 } finally {
-    $dbh = null;
+    $db = null;
 }
 
 ?>

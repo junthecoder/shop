@@ -1,5 +1,6 @@
 <?php
 require_once('utility.php');
+require_once('database.php');
 session_start();
 
 default_value($_POST, 'check', 0);
@@ -7,14 +8,10 @@ $success = false;
 
 if ($_POST['check'] == 1) {
     try {
-        $dsn = 'mysql:dbname=shop;host=db-1;charset=utf8';
-        $user = 'test';
-        $password = 'test';
-        $dbh = new PDO($dsn, $user, $password);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $db = new Database;
 
         $sql = 'SELECT name, password FROM user WHERE email = ?';
-        $stmt = $dbh->prepare($sql);
+        $stmt = $db->prepare($sql);
         $stmt->execute([$_POST['email']]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -27,7 +24,7 @@ if ($_POST['check'] == 1) {
     } catch (Exception $e) {
         print $e;
     } finally {
-        $dbh = null;
+        $db = null;
     }
 }
 

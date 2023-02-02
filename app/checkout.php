@@ -1,20 +1,16 @@
 <?php
 require_once('utility.php');
+require_once('database.php');
 session_start();
 
 try {
-    $dsn = 'mysql:dbname=shop;host=db-1;charset=utf8';
-    $user = 'test';
-    $password = 'test';
-    $dbh = new PDO($dsn, $user, $password);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+    $db = new Database;
     $ids = array_map(fn($item) => $item['id'], $_SESSION['cart']);
-    $items = get_items_by_ids($dbh, $ids);
+    $items = $db->get_items_by_ids($ids);
 } catch (Exception $e) {
     print $e;
 } finally {
-    $dbh = null;
+    $db = null;
 }
 
 ?>

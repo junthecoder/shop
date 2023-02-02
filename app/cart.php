@@ -1,5 +1,6 @@
 <?php
 require_once('utility.php');
+require_once('database.php');
 session_start();
 
 if (!isset($_SESSION['cart'])) {
@@ -7,11 +8,7 @@ if (!isset($_SESSION['cart'])) {
 }
 
 try {
-    $dsn = 'mysql:dbname=shop;host=db-1;charset=utf8';
-    $user = 'test';
-    $password = 'test';
-    $dbh = new PDO($dsn, $user, $password);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db = new Database;
 
     if (isset($_POST['action'])) {
         switch ($_POST['action']) {
@@ -34,12 +31,12 @@ try {
 
     $items = [];
     foreach ($_SESSION['cart'] as $cart_item) {
-        $items[$cart_item['id']] = get_item_by_id($dbh, $cart_item['id']);
+        $items[$cart_item['id']] = $db->get_item_by_id($cart_item['id']);
     }
 } catch (Exception $e) {
     print $e;
 } finally {
-    $dbh = null;
+    $db = null;
 }
 
 ?>

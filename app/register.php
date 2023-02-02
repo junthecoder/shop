@@ -1,5 +1,6 @@
 <?php
 require_once('utility.php');
+require_once('database.php');
 session_start();
 
 default_value($_POST, 'check', 0);
@@ -14,20 +15,16 @@ $register = $_POST['register'];
 
 if ($register == 1) {
     try {
-        $dsn = 'mysql:dbname=shop;host=db-1;charset=utf8';
-        $user = 'test';
-        $password = 'test';
-        $dbh = new PDO($dsn, $user, $password);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $db = new Database;
 
         $sql = 'INSERT INTO user (name, email, password) VALUES (?, ?, ?)';
-        $stmt = $dbh->prepare($sql);
+        $stmt = $db->prepare($sql);
         $password_hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
         $stmt->execute([$_POST['name'], $_POST['email'], $password_hash]);
     } catch (Exception $e) {
         print $e;
     } finally {
-        $dbh = null;
+        $db = null;
     }
 }
 
