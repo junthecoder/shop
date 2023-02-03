@@ -58,7 +58,7 @@ $total_price = 0;
         </div>
       </div>
     <?php endforeach ?>
-    <div class="fs-5 p-3 text-end">
+    <div class="fs-5 px-2 py-3 text-end">
       小計 ¥<?= $total_price ?>
     </div>
   </div>
