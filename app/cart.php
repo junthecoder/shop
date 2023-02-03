@@ -48,7 +48,6 @@ if ($_POST) {
       event.target.getAttribute('data-itemid');
     }
   </script>
-<?php include_template('pre_body.php', ['title' => 'ショッピングカート']) ?>
   <div class="container m-5">
     <div class="row">
       <h3 class="p-3">ショッピングカート</h3>
