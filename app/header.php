@@ -7,18 +7,18 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-<?php if (isset($_SESSION['user'])): ?>
-          <li class="nav-item">
-            <div class="navbar-text"><?= $_SESSION['user']['name'] ?> さん</div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="logout.php">ログアウト</a>
-          </li>
-<?php else: ?>
-          <li class="nav-item">
-            <a class="nav-link" href="login.php">ログイン</a>
+          <?php if (isset($_SESSION['user'])): ?>
+            <li class="nav-item">
+              <div class="navbar-text"><?= $_SESSION['user']['name'] ?> さん</div>
             </li>
-<?php endif ?>
+            <li class="nav-item">
+              <a class="nav-link" href="logout.php">ログアウト</a>
+            </li>
+          <?php else: ?>
+            <li class="nav-item">
+              <a class="nav-link" href="login.php">ログイン</a>
+            </li>
+          <?php endif ?>
           <li class="nav-item">
             <a class="nav-link" href="cart.php">
               カート (<?= array_reduce($_SESSION['cart'], fn ($sum, $item) => $sum + $item['count'], 0) ?>)
