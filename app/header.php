@@ -20,7 +20,9 @@
             </li>
 <?php endif ?>
           <li class="nav-item">
-            <a class="nav-link" href="cart.php">カート</a>
+            <a class="nav-link" href="cart.php">
+              カート (<?= array_reduce($_SESSION['cart'], fn ($sum, $item) => $sum + $item['count'], 0) ?>)
+            </a>
           </li>
         </ul>
       </div>
