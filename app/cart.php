@@ -56,14 +56,12 @@ if ($_POST) {
       <p>カートに商品はありません</p>
     <?php else: ?>
       <?php include_template('cart_items.php', ['deletable' => true, 'count_changeable' => true]) ?>
-        <div class="row p-2 float-end">
-          <form action="checkout.php" method="post">
-            <input type="hidden" name="action" value="default">
-            <button type="submit" class="btn btn-warning py-2">レジに進む</button>
-          </form>
-        </div>
-    </div>
-  <?php endif ?>
-</div>
-
+      <div class="row p-2 float-end">
+        <form action="checkout.php" method="post">
+          <input type="hidden" name="action" value="default">
+          <button type="submit" class="btn btn-warning py-2">レジに進む</button>
+        </form>
+      </div>
+    <?php endif ?>
+  </div>
 <?php include_template('post_body.php') ?>
