@@ -8,12 +8,17 @@ foreach ($_SESSION['cart'] as $cart_item) {
     $items[$cart_item['id']] = $db->get_item_by_id($cart_item['id']);
 }
 
+$total_price = 0;
+
 ?>
 
 <div class="row">
   <div class="col">
     <?php foreach ($_SESSION['cart'] as $cart_item): ?>
-      <?php $item = $items[$cart_item['id']]; ?>
+      <?php
+        $item = $items[$cart_item['id']];
+        $total_price += $item['price'] * $cart_item['count'];
+      ?>
       <div class="card">
         <div class="d-flex justify-content-between">
           <img src="/images/200x200.png" class="card-img-left" alt="<?= $item['name'] ?>" style="width: 160px; height: 160px">
@@ -53,5 +58,8 @@ foreach ($_SESSION['cart'] as $cart_item) {
         </div>
       </div>
     <?php endforeach ?>
+    <div class="fs-5 p-3 text-end">
+      小計 ¥<?= $total_price ?>
+    </div>
   </div>
 </div>
