@@ -7,31 +7,36 @@ if (!isset($_SESSION['cart'])) {
   $_SESSION['cart'] = [];
 }
 
-try {
-    $db = new Database;
+if ($_POST) {
+    try {
+        $db = new Database;
 
-    if (isset($_POST['action'])) {
-        switch ($_POST['action']) {
-            case 'add':
-                $_SESSION['cart'][] = ['id' => $_POST['item_id'], 'count' => 1];
-                break;
-            case 'change_count':
-                foreach ($_SESSION['cart'] as $key => $item) {
-                    if ($item['id'] == $_POST['item_id']) {
-                        $_SESSION['cart'][$key]['count'] = $_POST['count'];
-                        break;
+        if (isset($_POST['action'])) {
+            switch ($_POST['action']) {
+                case 'add':
+                    $_SESSION['cart'][] = ['id' => $_POST['item_id'], 'count' => 1];
+                    break;
+                case 'change_count':
+                    foreach ($_SESSION['cart'] as $key => $item) {
+                        if ($item['id'] == $_POST['item_id']) {
+                            $_SESSION['cart'][$key]['count'] = $_POST['count'];
+                            break;
+                        }
                     }
-                  }
-                break;
-            case 'delete':
-                $_SESSION['cart'] = array_filter($_SESSION['cart'], fn($item) => $item['id'] != $_POST['item_id']);
-                break;
+                    break;
+                case 'delete':
+                    $_SESSION['cart'] = array_filter($_SESSION['cart'], fn($item) => $item['id'] != $_POST['item_id']);
+                    break;
+            }
         }
+    } catch (Exception $e) {
+        print $e;
+    } finally {
+        $db = null;
     }
-} catch (Exception $e) {
-    print $e;
-} finally {
-    $db = null;
+
+    header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+    exit();
 }
 
 ?>
