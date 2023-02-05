@@ -38,12 +38,12 @@ CREATE TABLE address (
     full_name NVARCHAR(64) NOT NULL,
     phone_number VARCHAR(32) NOT NULL,
     postal_code VARCHAR(16) NOT NULL,
-    prefecture INT UNSIGNED NOT NULL,
+    prefecture_id INT UNSIGNED NOT NULL,
     address_line1 NVARCHAR(64) NOT NULL,
     address_line2 NVARCHAR(64),
     address_line3 NVARCHAR(64),
     address_line4 NVARCHAR(64),
-    FOREIGN KEY (prefecture) REFERENCES prefecture(id)
+    FOREIGN KEY (prefecture_id) REFERENCES prefecture(id)
 );
 
 CREATE TABLE user_address (
