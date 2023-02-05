@@ -16,11 +16,11 @@ try {
 
 <?php include_template('pre_body.php', ['title' => 'トップページ']) ?>
   <?php include 'header.php' ?>
-  <div class="container">
-    <div class="row">
+  <div class="container px-3 py-5">
+    <div class="row row-cols-auto g-4">
       <?php foreach ($items as $item): ?>
         <div class="col">
-          <div class="card my-2" style="width: 12rem;">
+          <div class="card" style="width: 12rem;">
             <img src="/images/200x200.png" class="card-img-top" alt="<?= $item['name'] ?>">
             <div class="card-body">
               <h5 class="card-title"><?= $item['name'] ?></h5>
