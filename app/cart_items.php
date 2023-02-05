@@ -31,7 +31,7 @@ $total_price = 0;
               <form action="cart.php" method="post">
                 <input type="hidden" name="action" value="change_count">
                 <input type="hidden" name="item_id" value="<?= $cart_item['id'] ?>">
-                <select name="count" class="form-select form-select-sm" style="width: 5em" value="<?= $cart_item['count'] ?>" onchange="this.form.submit()">
+                <select name="count" class="form-select form-select-sm" style="width: 5em" onchange="this.form.submit()">
                   <?php for ($i = 1; $i <= 10; ++$i): ?>
                     <option
                       value="<?= $i ?>"
