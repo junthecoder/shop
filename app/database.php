@@ -12,7 +12,8 @@ class Database extends PDO
         );
     }
 
-    public function get_all_items() {
+    public function get_all_items()
+    {
         $sql = 'SELECT id, name, price FROM item';
         $stmt = $this->prepare($sql);
         $stmt->execute();
@@ -23,7 +24,8 @@ class Database extends PDO
         return $items;
     }
 
-    public function get_items_by_ids($item_ids) {
+    public function get_items_by_ids($item_ids)
+    {
         $sql = 'SELECT id, name, price FROM item WHERE id = ?';
         $stmt = $this->prepare($sql);
         $items = [];
@@ -35,7 +37,8 @@ class Database extends PDO
         return $items;
     }
 
-    public function get_item_by_id($item_id) {
+    public function get_item_by_id($item_id)
+    {
         return $this->get_items_by_ids([$item_id])[0];
     }
 }
