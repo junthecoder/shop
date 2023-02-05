@@ -126,6 +126,11 @@ SET @user_id = LAST_INSERT_ID();
 # Test address
 INSERT INTO address (full_name, phone_number, postal_code, prefecture, address_line1, address_line2, address_line3, address_line4)
              VALUES ('山田 太郎', '0120-123-456', '1310045', 120, '墨田区押上', '一丁目1番1号', '東京スカイツリー', '5F');
-SET @address_id = LAST_INSERT_ID();
+SET @address_id1 = LAST_INSERT_ID();
 
-INSERT INTO user_address (user_id, address_id) VALUES (@user_id, @address_id);
+INSERT INTO address (full_name, phone_number, postal_code, prefecture, address_line1, address_line2, address_line3, address_line4)
+             VALUES ('山田 太郎 (2)', '0120-123-456', '1310045', 120, '墨田区押上', '一丁目1番1号', '東京スカイツリー', '5F');
+SET @address_id2 = LAST_INSERT_ID();
+
+INSERT INTO user_address (user_id, address_id) VALUES (@user_id, @address_id1);
+INSERT INTO user_address (user_id, address_id) VALUES (@user_id, @address_id2);
