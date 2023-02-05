@@ -35,9 +35,7 @@ $total_price = 0;
                   <?php for ($i = 1; $i <= 10; ++$i): ?>
                     <option
                       value="<?= $i ?>"
-                      <?php if ($i == $cart_item['count']): ?>
-                          selected="selected"
-                      <?php endif ?>
+                      <?= ($i == $cart_item['count']) ? 'selected' : '' ?>
                     >
                       <?= $i ?>
                     </option>
