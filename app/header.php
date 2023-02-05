@@ -21,7 +21,13 @@
           <?php endif ?>
           <li class="nav-item">
             <a class="nav-link" href="cart.php">
-              カート (<?= array_reduce($_SESSION['cart'], fn ($sum, $item) => $sum + $item['count'], 0) ?>)
+              カート
+              <?php
+                if (isset($_SESSION['cart'])) {
+                    $num_cart_items = array_reduce($_SESSION['cart'], fn ($sum, $item) => $sum + $item['count'], 0);
+                    echo " ($num_cart_items)";
+                }
+              ?>
             </a>
           </li>
         </ul>
