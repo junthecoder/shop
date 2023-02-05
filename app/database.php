@@ -5,7 +5,7 @@ class Database extends PDO
     public function __construct($dbname = 'shop', $host = 'db-1', $user = 'test', $pass = 'test')
     {
         parent::__construct(
-            "mysql:host=$host;dbname=$dbname;charset=utf8",
+            "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
             $user,
             $pass,
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
