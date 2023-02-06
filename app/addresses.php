@@ -7,6 +7,13 @@ if (!isset($_SESSION['user'])) {
     header('Location: login.php');
 }
 
+if (isset($_GET['delete'])) {
+  $db = new Database;
+  $stmt = $db->prepare('DELETE FROM address WHERE id = ?');
+  $stmt->execute([$_GET['id']]);
+  header("Location: /addresses.php");
+}
+
 if (isset($_GET['set_default'])) {
     $db = new Database;
     $stmt = $db->prepare('UPDATE user SET default_address_id = ? WHERE id = ?');
@@ -63,7 +70,7 @@ try {
               </p>
               <a class="fs-7" href="addresses_edit.php?id=<?= $address['id'] ?>">変更</a>
               <?php if (!$is_default_address): ?>
-                <a href="#">削除</a>
+                <a href="/addresses.php/?delete=1&id=<?= $address['id'] ?>">削除</a>
                 <a href="/addresses.php/?set_default=1&id=<?= $address['id'] ?>">規定の住所に設定</a>
               <?php endif ?>
             </div>

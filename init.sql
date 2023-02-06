@@ -37,7 +37,7 @@ CREATE TABLE user_address (
     address_id INT UNSIGNED,
     PRIMARY KEY (user_id, address_id),
     FOREIGN KEY (user_id) REFERENCES user(id),
-    FOREIGN KEY (address_id) REFERENCES address(id)
+    FOREIGN KEY (address_id) REFERENCES address(id) ON DELETE CASCADE
 );
 
 CREATE TABLE purchase (
