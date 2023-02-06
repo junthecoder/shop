@@ -61,6 +61,31 @@ class Database extends PDO
         return $addresses;
     }
 
+    public function get_address($user_id, $address_id)
+    {
+        $stmt = $this->prepare(<<<'EOT'
+            SELECT
+                address.id AS id,
+                full_name,
+                phone_number,
+                postal_code,
+                prefecture_id,
+                address_line1,
+                address_line2,
+                address_line3,
+                address_line4
+            FROM
+                user_address
+                JOIN address ON user_address.address_id = address.id
+            WHERE
+                user_address.user_id = ?
+                AND address.id = ?
+        EOT);
+
+        $stmt->execute([$user_id, $address_id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function get_default_address_id($user_id)
     {
         $stmt = $this->prepare('SELECT default_address_id FROM user WHERE user.id = ?');
@@ -79,5 +104,47 @@ class Database extends PDO
     {
         $stmt = $this->prepare('UPDATE user SET default_address_id = ? WHERE id = ?');
         $stmt->execute([$address_id, $user_id]);
+    }
+
+    public function get_prefectures()
+    {
+        $stmt = $this->prepare('SELECT id, name FROM prefecture');;
+        $stmt->execute();
+        $prefectures = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $prefectures[] = $row;
+        }
+        return $prefectures;
+    }
+
+    public function update_address($address_id, $map)
+    {
+        $stmt = $this->prepare(<<<'EOT'
+            UPDATE
+                address
+            SET
+                full_name = ?,
+                phone_number = ?,
+                postal_code = ?,
+                prefecture_id = ?,
+                address_line1 = ?,
+                address_line2 = ?,
+                address_line3 = ?,
+                address_line4 = ?
+            WHERE
+                address.id = ?
+        EOT);
+
+        $stmt->execute([
+            $map['full_name'],
+            $map['phone_number'],
+            $map['postal_code'],
+            $map['prefecture_id'],
+            $map['address_line1'],
+            $map['address_line2'],
+            $map['address_line3'],
+            $map['address_line4'],
+            $address_id
+        ]);
     }
 }

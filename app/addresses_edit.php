@@ -13,72 +13,18 @@ if (isset($_POST['cancel_button'])) {
 
 if (isset($_POST['save_button'])) {
     $db = new Database;
-    $stmt = $db->prepare(<<<'EOT'
-        UPDATE
-            address
-        SET
-            full_name = ?,
-            phone_number = ?,
-            postal_code = ?,
-            prefecture_id = ?,
-            address_line1 = ?,
-            address_line2 = ?,
-            address_line3 = ?,
-            address_line4 = ?
-        WHERE
-            address.id = ?
-    EOT);
-
-    $stmt->execute([
-        $_POST['full_name'],
-        $_POST['phone_number'],
-        $_POST['postal_code'],
-        $_POST['prefecture_id'],
-        $_POST['address_line1'],
-        $_POST['address_line2'],
-        $_POST['address_line3'],
-        $_POST['address_line4'],
-        $_POST['id']]
-    );
-
+    $db->update_address($_POST['id'], $_POST);
     header('Location: addresses.php');
 }
 
-try {
-    $db = new Database;
-    $stmt = $db->prepare(<<<'EOT'
-        SELECT
-            address.id AS id,
-            full_name,
-            phone_number,
-            postal_code,
-            prefecture_id,
-            address_line1,
-            address_line2,
-            address_line3,
-            address_line4
-        FROM
-            user_address
-            JOIN address ON user_address.address_id = address.id
-        WHERE
-            user_address.user_id = ?
-            AND address.id = ?
-    EOT);
-    $stmt->execute([$_SESSION['user']['id'], $_GET['id']]);
-    $address = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($address === false) {
-      die("住所のIDが不正です。");
-    }
-
-    $stmt = $db->prepare('SELECT id, name FROM prefecture');;
-    $stmt->execute();
-    $prefectures = [];
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $prefectures[] = $row;
-    }
-} catch (Exception $e) {
-    echo $e;
+$db = new Database;
+$address = $db->get_address($_SESSION['user']['id'], $_GET['id']);
+if ($address === false) {
+    die("住所のIDが不正です。");
 }
+
+$prefectures = $db->get_prefectures();
+
 ?>
 
 <?php include_template('pre_body.php', ['title' => '住所']) ?>
