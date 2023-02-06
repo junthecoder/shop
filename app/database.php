@@ -75,8 +75,7 @@ class Database extends PDO
                 address_line3,
                 address_line4
             FROM
-                user_address
-                JOIN address ON user_address.address_id = address.id
+                address
             WHERE
                 address.id = ?
         EOT);
