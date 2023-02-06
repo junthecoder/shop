@@ -36,6 +36,22 @@ try {
     $db = null;
 }
 
+$db = new Database;
+$addresses = $db->get_addresses($_SESSION['user']['id']);
+$default_address_id = $db->get_default_address_id($_SESSION['user']['id']);
+
+function concat_address($a)
+{
+  return sprintf(
+      '%s, 〒%s, %s %s %s %s %s, 電話番号: %s',
+      $a['full_name'],
+      $a['postal_code'], $a['prefecture'],
+      $a['address_line1'], $a['address_line2'],
+      $a['address_line3'], $a['address_line4'],
+      $a['phone_number']
+  );
+}
+
 ?>
 
 <?php include_template('pre_body.php', ['title' => '注文']) ?>
@@ -53,6 +69,21 @@ try {
         <p>カートに商品はありません</p>
       <?php else: ?>
         <?php include_template('cart_items.php', ['deletable' => false, 'count_changeable' => false]) ?>
+        <?php foreach ($addresses as $address): ?>
+          <div class="form-check">
+            <?php $radio_id = "address_radio<?= {$address['id']} ?>"; ?>
+            <input
+              class="form-check-input"
+              type="radio"
+              name="address_id"
+              id="<?= $radio_id ?>"
+              <?= ($address['id'] == $default_address_id) ? 'checked' : '' ?>
+            >
+            <label class="form-check-label" for="<?= $radio_id ?>">
+              <?= concat_address($address) ?>
+            </label>
+          </div>
+        <?php endforeach ?>
         <div class="row p-2 float-end">
           <form action="checkout.php" method="post">
             <input type="hidden" name="action" value="confirm">
