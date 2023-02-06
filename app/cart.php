@@ -43,11 +43,6 @@ if ($_POST) {
 
 <?php include_template('pre_body.php', ['title' => 'ショッピングカート']) ?>
   <?php include 'header.php' ?>
-  <script>
-    function changeCount(event) {
-      event.target.getAttribute('data-itemid');
-    }
-  </script>
   <div class="container m-5">
     <div class="row">
       <h3 class="p-3">ショッピングカート</h3>
