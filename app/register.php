@@ -3,24 +3,32 @@ require_once('utility.php');
 require_once('database.php');
 session_start();
 
-default_value($_POST, 'check', 0);
-default_value($_POST, 'register', 0);
 default_value($_POST, 'name', '');
 default_value($_POST, 'email', '');
 default_value($_POST, 'password', '');
 default_value($_POST, 'password-check', '');
 
-$check = $_POST['check'];
-$register = $_POST['register'];
+if (isset($_POST['check'])) {
+    $_SESSION['post'] = $_POST;
+    header('Location: register.php?check');
+}
 
-if ($register == 1) {
+if (isset($_POST['register'])) {
+    $_SESSION['post'] = $_POST;
+    header('Location: register.php?register');
+}
+
+$check = isset($_GET['check']);
+$register = isset($_GET['register']);
+
+if ($register) {
     try {
         $db = new Database;
 
         $sql = 'INSERT INTO user (name, email, password) VALUES (?, ?, ?)';
         $stmt = $db->prepare($sql);
         $password_hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
-        $stmt->execute([$_POST['name'], $_POST['email'], $password_hash]);
+        $stmt->execute([$_SESSION['post']['name'], $_SESSION['post']['email'], $password_hash]);
     } catch (Exception $e) {
         print $e;
     } finally {
