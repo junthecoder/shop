@@ -21,19 +21,11 @@ if (isset($_POST['register'])) {
 $check = isset($_GET['check']);
 $register = isset($_GET['register']);
 
-if ($register) {
-    try {
-        $db = new Database;
+$post = $_SESSION['post'];
 
-        $sql = 'INSERT INTO user (name, email, password) VALUES (?, ?, ?)';
-        $stmt = $db->prepare($sql);
-        $password_hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
-        $stmt->execute([$_SESSION['post']['name'], $_SESSION['post']['email'], $password_hash]);
-    } catch (Exception $e) {
-        print $e;
-    } finally {
-        $db = null;
-    }
+if ($register) {
+    $db = new Database;
+    $db->add_user($post['name'], $post['email'], $post['password']);
 }
 
 ?>
@@ -51,8 +43,8 @@ if ($register) {
         <div class="row mb-3">
           <label for="name-input" class="form-label">氏名</label>
           <?php if ($check): ?>
-            <p><?= $_POST['name'] ?></p>
-            <input type="hidden" name="name" value="<?= $_POST['name'] ?>">
+            <p><?= $post['name'] ?></p>
+            <input type="hidden" name="name" value="<?= $post['name'] ?>">
           <?php else: ?>
             <input type="text" name="name" class="form-control" id="name-input" placeholder="山田 太郎">
           <?php endif ?>
@@ -60,8 +52,8 @@ if ($register) {
         <div class="row mb-3">
           <label for="email-input" class="form-label">メールアドレス</label>
           <?php if ($check): ?>
-            <p><?= $_POST['email'] ?></p>
-            <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
+            <p><?= $post['email'] ?></p>
+            <input type="hidden" name="email" value="<?= $post['email'] ?>">
           <?php else: ?>
             <input type="email" name="email" class="form-control" id="email-input" placeholder="name@example.com">
           <?php endif ?>
@@ -70,7 +62,7 @@ if ($register) {
           <label for="password-input" class="form-label">パスワード</label>
           <?php if ($check): ?>
             <p>****</p>
-            <input type="hidden" name="password" value="<?= $_POST['password'] ?>">
+            <input type="hidden" name="password" value="<?= $post['password'] ?>">
           <?php else: ?>
             <input type="password" name="password" class="form-control" id="password-input" placeholder="8文字以上">
           <?php endif ?>

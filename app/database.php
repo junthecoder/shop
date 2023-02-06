@@ -154,4 +154,12 @@ class Database extends PDO
             $address_id
         ]);
     }
+
+    public function add_user($name, $email, $password)
+    {
+        $sql = 'INSERT INTO user (name, email, password) VALUES (?, ?, ?)';
+        $stmt = $this->prepare($sql);
+        $password_hash = password_hash($password, PASSWORD_BCRYPT);
+        $stmt->execute([$name, $email, $password_hash]);
+    }
 }
