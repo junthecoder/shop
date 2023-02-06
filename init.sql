@@ -4,32 +4,6 @@ CREATE TABLE item (
     price INT
 );
 
-CREATE TABLE user (
-    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    email VARCHAR(254) UNIQUE NOT NULL,
-    password CHAR(60) NOT NULL,
-    name NVARCHAR(64) NOT NULL,
-    default_address_id INT UNSIGNED,
-    FOREIGN KEY (default_address_id) REFERENCES address(id),
-    INDEX(email)
-);
-
-CREATE TABLE purchase (
-    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    user_id INT UNSIGNED NOT NULL,
-    purchase_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES user(id)
-);
-
-CREATE TABLE purchase_item (
-    purchase_id INT UNSIGNED NOT NULL,
-    item_id INT UNSIGNED NOT NULL,
-    count INT UNSIGNED NOT NULL,
-    PRIMARY KEY (purchase_id, item_id),
-    FOREIGN KEY (purchase_id) REFERENCES purchase(id),
-    FOREIGN KEY (item_id) REFERENCES item(id)
-);
-
 CREATE TABLE prefecture (
     id INT UNSIGNED PRIMARY KEY,
     name NCHAR(8)
@@ -48,12 +22,38 @@ CREATE TABLE address (
     FOREIGN KEY (prefecture_id) REFERENCES prefecture(id)
 );
 
+CREATE TABLE user (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(254) UNIQUE NOT NULL,
+    password CHAR(60) NOT NULL,
+    name NVARCHAR(64) NOT NULL,
+    default_address_id INT UNSIGNED,
+    FOREIGN KEY (default_address_id) REFERENCES address(id),
+    INDEX(email)
+);
+
 CREATE TABLE user_address (
     user_id INT UNSIGNED,
     address_id INT UNSIGNED,
     PRIMARY KEY (user_id, address_id),
     FOREIGN KEY (user_id) REFERENCES user(id),
     FOREIGN KEY (address_id) REFERENCES address(id)
+);
+
+CREATE TABLE purchase (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    user_id INT UNSIGNED NOT NULL,
+    purchase_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+CREATE TABLE purchase_item (
+    purchase_id INT UNSIGNED NOT NULL,
+    item_id INT UNSIGNED NOT NULL,
+    count INT UNSIGNED NOT NULL,
+    PRIMARY KEY (purchase_id, item_id),
+    FOREIGN KEY (purchase_id) REFERENCES purchase(id),
+    FOREIGN KEY (item_id) REFERENCES item(id)
 );
 
 # Prefectures
