@@ -7,6 +7,10 @@ if (empty($_SESSION['cart'])) {
     redirect('cart.php');
 }
 
+if (!isset($_SESSION['user'])) {
+  header('Location: login.php');
+}
+
 try {
     $db = new Database;
 
