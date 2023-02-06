@@ -10,12 +10,12 @@ default_value($_POST, 'password-check', '');
 
 if (isset($_POST['check'])) {
     $_SESSION['post'] = $_POST;
-    header('Location: register.php?check');
+    redirect('register.php?check');
 }
 
 if (isset($_POST['register'])) {
     $_SESSION['post'] = $_POST;
-    header('Location: register.php?register');
+    redirect('register.php?register');
 }
 
 $check = isset($_GET['check']);
@@ -29,7 +29,7 @@ if ($register) {
 
     session_regenerate_id(true);
     $_SESSION['user'] = $db->get_user($post['email']);
-    header('Location: index.php');
+    redirect('index.php');
 }
 
 ?>

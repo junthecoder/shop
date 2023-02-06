@@ -11,12 +11,12 @@ $db = new Database;
 
 if (isset($_GET['delete'])) {
   $db->delete_address($_GET['id']);
-  header("Location: /addresses.php");
+  redirect();
 }
 
 if (isset($_GET['set_default'])) {
     $db->set_default_address($_SESSION['user']['id'], $_GET['id']);
-    header("Location: /addresses.php");
+    redirect();
 }
 
 $addresses = $db->get_addresses($_SESSION['user']['id']);

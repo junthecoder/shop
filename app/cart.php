@@ -35,8 +35,7 @@ if ($_POST) {
         $db = null;
     }
 
-    header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-    exit();
+    redirect();
 }
 
 ?>

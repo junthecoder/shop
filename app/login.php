@@ -13,7 +13,7 @@ if ($_POST['check'] == 1) {
     if ($success) {
         session_regenerate_id(true);
         $_SESSION['user'] = $row;
-        header('Location: index.php');
+        redirect('index.php');
     }
 }
 

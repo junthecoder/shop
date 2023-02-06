@@ -4,17 +4,17 @@ require_once('database.php');
 session_start();
 
 if (!isset($_SESSION['user'])) {
-    header('Location: login.php');
+    redirect('login.php');
 }
 
 if (isset($_POST['cancel_button'])) {
-    header('Location: addresses.php');
+  redirect('addresses.php');
 }
 
 if (isset($_POST['save_button'])) {
     $db = new Database;
     $db->update_address($_POST['id'], $_POST);
-    header('Location: addresses.php');
+    redirect('addresses.php');
 }
 
 $db = new Database;

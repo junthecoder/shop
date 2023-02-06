@@ -4,7 +4,7 @@ require_once('database.php');
 session_start();
 
 if (empty($_SESSION['cart'])) {
-    header('Location: cart.php');
+    redirect('cart.php');
 }
 
 try {

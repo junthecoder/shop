@@ -13,4 +13,13 @@ function include_template($filename, $variables = [])
     include $filename;
 }
 
+function redirect($url = null)
+{
+    if (!$url) {
+        $url = $_SERVER['REQUEST_URI'];
+    }
+    header("Location: $url", true, 303);
+    exit();
+}
+
 ?>
