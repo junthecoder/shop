@@ -45,9 +45,9 @@ if ($_POST['check'] == 1) {
           <input type="submit" class="btn btn-primary" value="ログイン">
         </div>
       </form>
-      <form class="container px-5" style="width: 350px;" action="register.php" method="post">
+      <div class="container px-5" style="width: 350px;">
         <div class="row">
-          <input type="submit" class="btn btn-secondary" value="アカウントを作成する">
+          <a href="register.php" class="btn btn-secondary">アカウントを作成する</a>
         </div>
       </form>
     <?php endif ?>
