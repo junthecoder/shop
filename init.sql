@@ -9,6 +9,8 @@ CREATE TABLE user (
     email VARCHAR(254) UNIQUE NOT NULL,
     password CHAR(60) NOT NULL,
     name NVARCHAR(64) NOT NULL,
+    default_address_id INT UNSIGNED,
+    FOREIGN KEY (default_address_id) REFERENCES address(id),
     INDEX(email)
 );
 

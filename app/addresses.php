@@ -7,6 +7,13 @@ if (!isset($_SESSION['user'])) {
     header('Location: login.php');
 }
 
+if (isset($_GET['set_default'])) {
+    $db = new Database;
+    $stmt = $db->prepare('UPDATE user SET default_address_id = ? WHERE id = ?');
+    $stmt->execute([$_GET['id'], $_SESSION['user']['id']]);
+    header("Location: /addresses.php");
+}
+
 try {
     $db = new Database;
     $stmt = $db->prepare(<<<'EOT'
@@ -23,6 +30,11 @@ try {
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $addresses[] = $row;
     }
+
+    $stmt = $db->prepare('SELECT default_address_id FROM user WHERE user.id = ?');
+    $stmt->execute([$_SESSION['user']['id']]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $default_address_id = $row['default_address_id'];
 } catch (Exception $e) {
     echo $e;
 }
@@ -33,8 +45,9 @@ try {
   <div class="container p-4">
     <div class="row row-cols-auto g-4">
       <?php foreach ($addresses as $address): ?>
+        <?php $is_default_address = ($address['id'] == $default_address_id) ?>
         <div class="col">
-          <div class="card" style="width: 18rem;">
+          <div class="card <?= $is_default_address ? 'border-primary' : ''?>" style="width: 18rem;">
             <div class="card-body">
               <h6 class="card-title fw-bold">
                 <?= $address['full_name'] ?>
@@ -49,8 +62,10 @@ try {
                 <?= $address['phone_number'] ?>
               </p>
               <a class="fs-7" href="addresses_edit.php?id=<?= $address['id'] ?>">変更</a>
-              <a href="#">削除</a>
-              <a href="#">規定の住所に設定</a>
+              <?php if (!$is_default_address): ?>
+                <a href="#">削除</a>
+                <a href="/addresses.php/?set_default=1&id=<?= $address['id'] ?>">規定の住所に設定</a>
+              <?php endif ?>
             </div>
           </div>
         </div>
