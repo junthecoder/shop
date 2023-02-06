@@ -42,6 +42,8 @@ $total_price = 0;
                   <?php endfor ?>
                 </select>
               </form>
+            <?php else: ?>
+              数量: <?= $cart_item['count'] ?>
             <?php endif ?>
             <?php if ($deletable): ?>
               <div class="float-end">
