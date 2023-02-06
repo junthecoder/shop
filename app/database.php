@@ -45,13 +45,22 @@ class Database extends PDO
     public function get_addresses($user_id)
     {
         $stmt = $this->prepare(<<<'EOT'
-            SELECT address.id AS id, full_name, phone_number, postal_code, prefecture.name AS prefecture, address_line1, address_line2, address_line3, address_line4
-            FROM user_address
-            JOIN address
-            ON user_address.address_id = address.id
-            JOIN prefecture
-            ON address.prefecture_id = prefecture.id
-            WHERE user_address.user_id = ?
+        SELECT
+            address.id AS id,
+            full_name,
+            phone_number,
+            postal_code,
+            prefecture.name AS prefecture,
+            address_line1,
+            address_line2,
+            address_line3,
+            address_line4
+        FROM
+            user_address
+            JOIN address ON user_address.address_id = address.id
+            JOIN prefecture ON address.prefecture_id = prefecture.id
+        WHERE
+            user_address.user_id = ?
         EOT);
         $stmt->execute([$user_id]);
         $addresses = [];
