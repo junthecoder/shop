@@ -13,12 +13,12 @@ function include_template($filename, $variables = [])
     include $filename;
 }
 
-function redirect($url = null)
+function redirect($url = null, $add_to_history = true)
 {
     if (!$url) {
         $url = $_SERVER['REQUEST_URI'];
     }
-    header("Location: $url", true, 303);
+    header("Location: $url", true, $add_to_history ? 303 : 302);
     exit();
 }
 

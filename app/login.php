@@ -3,10 +3,9 @@ require_once('utility.php');
 require_once('database.php');
 session_start();
 
-default_value($_POST, 'check', 0);
 $success = false;
 
-if ($_POST['check'] == 1) {
+if ($_POST) {
     $db = new Database;
     $row = $db->get_user($_POST['email']);
     $success = ($row !== false and password_verify($_POST['password'], $row['password']));
@@ -14,6 +13,8 @@ if ($_POST['check'] == 1) {
         session_regenerate_id(true);
         $_SESSION['user'] = $row;
         redirect('index.php');
+    } else {
+        redirect(add_to_history: false);
     }
 }
 
@@ -41,7 +42,6 @@ if ($_POST['check'] == 1) {
           <input type="password" name="password" class="form-control" id="password-input">
         </div>
         <div class="row my-4">
-          <input type="hidden" name="check" value="1">
           <input type="submit" class="btn btn-primary" value="ログイン">
         </div>
       </form>
