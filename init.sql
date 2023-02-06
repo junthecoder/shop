@@ -126,11 +126,11 @@ INSERT INTO user (email, password, name) VALUES ('taro@example.com', '$2y$10$/of
 SET @user_id = LAST_INSERT_ID();
 
 # Test address
-INSERT INTO address (full_name, phone_number, postal_code, prefecture, address_line1, address_line2, address_line3, address_line4)
+INSERT INTO address (full_name, phone_number, postal_code, prefecture_id, address_line1, address_line2, address_line3, address_line4)
              VALUES ('山田 太郎', '0120-123-456', '1310045', 120, '墨田区押上', '一丁目1番1号', '東京スカイツリー', '5F');
 SET @address_id1 = LAST_INSERT_ID();
 
-INSERT INTO address (full_name, phone_number, postal_code, prefecture, address_line1, address_line2, address_line3, address_line4)
+INSERT INTO address (full_name, phone_number, postal_code, prefecture_id, address_line1, address_line2, address_line3, address_line4)
              VALUES ('山田 太郎 (2)', '0120-123-456', '1310045', 120, '墨田区押上', '一丁目1番1号', '東京スカイツリー', '5F');
 SET @address_id2 = LAST_INSERT_ID();
 
