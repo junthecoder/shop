@@ -136,3 +136,5 @@ SET @address_id2 = LAST_INSERT_ID();
 
 INSERT INTO user_address (user_id, address_id) VALUES (@user_id, @address_id1);
 INSERT INTO user_address (user_id, address_id) VALUES (@user_id, @address_id2);
+
+UPDATE user SET default_address_id = @address_id1 WHERE id = @user_id;
