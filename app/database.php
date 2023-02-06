@@ -41,4 +41,43 @@ class Database extends PDO
     {
         return $this->get_items_by_ids([$item_id])[0];
     }
+
+    public function get_addresses($user_id)
+    {
+        $stmt = $this->prepare(<<<'EOT'
+            SELECT address.id AS id, full_name, phone_number, postal_code, prefecture.name AS prefecture, address_line1, address_line2, address_line3, address_line4
+            FROM user_address
+            JOIN address
+            ON user_address.address_id = address.id
+            JOIN prefecture
+            ON address.prefecture_id = prefecture.id
+            WHERE user_address.user_id = ?
+        EOT);
+        $stmt->execute([$user_id]);
+        $addresses = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $addresses[] = $row;
+        }
+        return $addresses;
+    }
+
+    public function get_default_address_id($user_id)
+    {
+        $stmt = $this->prepare('SELECT default_address_id FROM user WHERE user.id = ?');
+        $stmt->execute([$_SESSION['user']['id']]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['default_address_id'];
+    }
+
+    public function delete_address($address_id)
+    {
+        $stmt = $this->prepare('DELETE FROM address WHERE id = ?');
+        $stmt->execute([$address_id]);
+    }
+
+    public function set_default_address($user_id, $address_id)
+    {
+        $stmt = $this->prepare('UPDATE user SET default_address_id = ? WHERE id = ?');
+        $stmt->execute([$address_id, $user_id]);
+    }
 }
