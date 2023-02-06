@@ -7,25 +7,13 @@ default_value($_POST, 'check', 0);
 $success = false;
 
 if ($_POST['check'] == 1) {
-    try {
-        $db = new Database;
-
-        $sql = 'SELECT id, name, password FROM user WHERE email = ?';
-        $stmt = $db->prepare($sql);
-        $stmt->execute([$_POST['email']]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        $success = ($row !== false and password_verify($_POST['password'], $row['password']));
-
-        if ($success) {
-            session_regenerate_id(true);
-            $_SESSION['user'] = $row;
-            header('Location: index.php');
-        }
-    } catch (Exception $e) {
-        print $e;
-    } finally {
-        $db = null;
+    $db = new Database;
+    $row = $db->get_user($_POST['email']);
+    $success = ($row !== false and password_verify($_POST['password'], $row['password']));
+    if ($success) {
+        session_regenerate_id(true);
+        $_SESSION['user'] = $row;
+        header('Location: index.php');
     }
 }
 

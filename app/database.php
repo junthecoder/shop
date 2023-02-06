@@ -162,4 +162,12 @@ class Database extends PDO
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
         $stmt->execute([$name, $email, $password_hash]);
     }
+
+    public function get_user($email)
+    {
+        $sql = 'SELECT id, name, password FROM user WHERE email = ?';
+        $stmt = $this->prepare($sql);
+        $stmt->execute([$email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
