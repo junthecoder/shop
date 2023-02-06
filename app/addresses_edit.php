@@ -18,7 +18,7 @@ if (isset($_POST['save_button'])) {
 }
 
 $db = new Database;
-$address = $db->get_address($_SESSION['user']['id'], $_GET['id']);
+$address = $db->get_address($_GET['id']);
 if ($address === false) {
     die("住所のIDが不正です。");
 }

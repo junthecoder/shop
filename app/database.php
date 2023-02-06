@@ -61,7 +61,7 @@ class Database extends PDO
         return $addresses;
     }
 
-    public function get_address($user_id, $address_id)
+    public function get_address($address_id)
     {
         $stmt = $this->prepare(<<<'EOT'
             SELECT
@@ -78,11 +78,10 @@ class Database extends PDO
                 user_address
                 JOIN address ON user_address.address_id = address.id
             WHERE
-                user_address.user_id = ?
-                AND address.id = ?
+                address.id = ?
         EOT);
 
-        $stmt->execute([$user_id, $address_id]);
+        $stmt->execute([$address_id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
