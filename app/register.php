@@ -21,11 +21,15 @@ if (isset($_POST['register'])) {
 $check = isset($_GET['check']);
 $register = isset($_GET['register']);
 
-$post = $_SESSION['post'];
+$post = isset($_SESSION['post']) ? $_SESSION['post'] : [];
 
 if ($register) {
     $db = new Database;
     $db->add_user($post['name'], $post['email'], $post['password']);
+
+    session_regenerate_id(true);
+    $_SESSION['user'] = $db->get_user($post['email']);
+    header('Location: index.php');
 }
 
 ?>
