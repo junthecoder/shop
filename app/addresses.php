@@ -10,7 +10,7 @@ if (!isset($_SESSION['user'])) {
 try {
     $db = new Database;
     $stmt = $db->prepare(<<<'EOT'
-        SELECT full_name, phone_number, postal_code, prefecture.name AS prefecture, address_line1, address_line2, address_line3, address_line4
+        SELECT address.id AS id, full_name, phone_number, postal_code, prefecture.name AS prefecture, address_line1, address_line2, address_line3, address_line4
         FROM user_address
         JOIN address
         ON user_address.address_id = address.id
@@ -48,6 +48,9 @@ try {
                 <?= $address['address_line4'] ?><br>
                 <?= $address['phone_number'] ?>
               </p>
+              <a class="fs-7" href="addresses_edit.php?id=<?= $address['id'] ?>">変更</a>
+              <a href="#">削除</a>
+              <a href="#">規定の住所に設定</a>
             </div>
           </div>
         </div>
