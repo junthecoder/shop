@@ -19,8 +19,8 @@ try {
         $_POST['action'] = 'default';
     }
     if ($_POST['action'] == 'confirm') {
-        $stmt = $db->prepare('INSERT INTO purchase (user_id) VALUES (?)');
-        $stmt->execute([$_SESSION['user']['id']]);
+        $stmt = $db->prepare('INSERT INTO purchase (user_id, address_id) VALUES (?, ?)');
+        $stmt->execute([$_SESSION['user']['id'], $_POST['address_id']]);
         $purchase_id = $db->lastInsertId();
 
         $stmt = $db->prepare('INSERT INTO purchase_item (purchase_id, item_id, count) VALUES (?, ?, ?)');
@@ -68,28 +68,29 @@ function concat_address($a)
       <?php if (empty($_SESSION['cart'])): ?>
         <p>カートに商品はありません</p>
       <?php else: ?>
-        <?php include_template('cart_items.php', ['deletable' => false, 'count_changeable' => false]) ?>
-        <?php foreach ($addresses as $address): ?>
-          <div class="form-check">
-            <?php $radio_id = "address_radio<?= {$address['id']} ?>"; ?>
-            <input
-              class="form-check-input"
-              type="radio"
-              name="address_id"
-              id="<?= $radio_id ?>"
-              <?= ($address['id'] == $default_address_id) ? 'checked' : '' ?>
-            >
-            <label class="form-check-label" for="<?= $radio_id ?>">
-              <?= concat_address($address) ?>
-            </label>
-          </div>
-        <?php endforeach ?>
-        <div class="row p-2 float-end">
-          <form action="checkout.php" method="post">
+        <form action="checkout.php" method="post">
+          <?php include_template('cart_items.php', ['deletable' => false, 'count_changeable' => false]) ?>
+          <?php foreach ($addresses as $address): ?>
+            <div class="form-check">
+              <?php $radio_id = "address_radio<?= {$address['id']} ?>"; ?>
+              <input
+                class="form-check-input"
+                type="radio"
+                name="address_id"
+                value="<?= $address['id'] ?>"
+                id="<?= $radio_id ?>"
+                <?= ($address['id'] == $default_address_id) ? 'checked' : '' ?>
+              >
+              <label class="form-check-label" for="<?= $radio_id ?>">
+                <?= concat_address($address) ?>
+              </label>
+            </div>
+          <?php endforeach ?>
+          <div class="row p-2 float-end">
             <input type="hidden" name="action" value="confirm">
             <button type="submit" class="btn btn-warning py-2">注文を確定する</button>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     <?php endif ?>
   <?php endif ?>

@@ -43,7 +43,9 @@ CREATE TABLE user_address (
 CREATE TABLE purchase (
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     user_id INT UNSIGNED NOT NULL,
+    address_id INT UNSIGNED,
     purchase_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (address_id) REFERENCES address(id),
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
