@@ -18,6 +18,7 @@ if ($_POST['check'] == 1) {
         $success = ($row !== false and password_verify($_POST['password'], $row['password']));
 
         if ($success) {
+            session_regenerate_id(true);
             $_SESSION['user'] = $row;
             header('Location: index.php');
         }
