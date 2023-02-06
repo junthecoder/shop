@@ -29,7 +29,11 @@ try {
             <form action="cart.php" method="post">
               <input type="hidden" name="action" value="add">
               <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
-              <button type="submit" class="btn btn-warning">カートに入れる</button>
+              <div class="container">
+                <div class="row">
+                  <button type="submit" class="btn btn-warning mx-auto">カートに入れる</button>
+                </div>
+              </div>
             </form>
           </div>
         </div>
