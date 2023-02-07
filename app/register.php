@@ -117,16 +117,18 @@ if ($register) {
       if (!/^\S+@\S+$/.test(email)) {
         errors.push('メールアドレスを入力してください');
       }
-      $('#email-feedback').html(errors.join('<br>'));
 
       $.ajax({
         type: 'POST',
         url: 'validation.php',
+        async: false,
         data: { email }
       })
       .done(data => {
-        $('#email-feedback').html(JSON.parse(data)).join('<br>');
+        errors = JSON.parse(data);
       });
+
+      $('#email-feedback').html(errors.join('<br>'));
 
       return errors.length === 0;
     }
