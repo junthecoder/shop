@@ -119,6 +119,15 @@ if ($register) {
       }
       $('#email-feedback').html(errors.join('<br>'));
 
+      $.ajax({
+        type: 'POST',
+        url: 'validation.php',
+        data: { email }
+      })
+      .done(data => {
+        $('#email-feedback').html(JSON.parse(data)).join('<br>');
+      });
+
       return errors.length === 0;
     }
 
