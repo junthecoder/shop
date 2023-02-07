@@ -35,12 +35,12 @@ if ($register) {
 ?>
 
 <?php include_template('pre_body.php', ['title' => 'ユーザ登録']) ?>
-  <div class="container p-5" style="width: 450px;">
+  <div class="container p-5" style="max-width: 480px;">
     <?php if ($register): ?>
       <p>ユーザ登録を完了しました。</p>
       <a href="/">トップページへ</a>
     <?php else: ?>
-      <form class="container p-5 needs-validation" style="width: 450px;" action="register.php" method="post" id="registration-form" novalidate>
+      <form class="container p-5 needs-validation" action="register.php" method="post" id="registration-form" novalidate>
         <div class="row mb-4">
           <h3>ユーザ登録</h3>
         </div>
