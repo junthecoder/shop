@@ -138,6 +138,9 @@ if ($register) {
       if (password.length === 0) {
         errors.push('パスワードを入力してください');
       }
+      if (password.length < 8) {
+        errors.push('8文字以上で入力してください');
+      }
       if (!/[a-zA-Z]/.test(password)) {
         errors.push('アルファベットが含まれていません');
       }
