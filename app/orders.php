@@ -2,14 +2,10 @@
 require_once('utility.php');
 require_once('database.php');
 session_start();
-
-if (!isset($_SESSION['user'])) {
-  header('Location: login.php');
-}
+ensure_login();
 
 $db = new Database;
 $purchases = $db->get_purchases($_SESSION['user']['id']);
-
 ?>
 
 <?php include_template('pre_body.php', ['title' => '注文履歴']) ?>

@@ -2,10 +2,7 @@
 require_once('utility.php');
 require_once('database.php');
 session_start();
-
-if (!isset($_SESSION['user'])) {
-    header('Location: login.php');
-}
+ensure_login();
 
 $db = new Database;
 

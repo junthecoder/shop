@@ -22,4 +22,9 @@ function redirect($url = null, $add_to_history = true)
     exit();
 }
 
-?>
+function ensure_login()
+{
+    if (!isset($_SESSION['user'])) {
+        header('Location: login.php');
+    }
+}

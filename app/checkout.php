@@ -2,13 +2,10 @@
 require_once('utility.php');
 require_once('database.php');
 session_start();
+ensure_login();
 
 if (empty($_SESSION['cart'])) {
     redirect('cart.php');
-}
-
-if (!isset($_SESSION['user'])) {
-  header('Location: login.php');
 }
 
 $db = new Database;

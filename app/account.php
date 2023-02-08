@@ -2,10 +2,7 @@
 require_once('utility.php');
 require_once('database.php');
 session_start();
-
-if (!isset($_SESSION['user'])) {
-  header('Location: login.php');
-}
+ensure_login();
 
 $links = [
   ['title' => '注文履歴', 'href' => 'orders.php'],
