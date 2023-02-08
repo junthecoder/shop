@@ -225,4 +225,37 @@ class Database extends PDO
         $stmt->execute([$email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function get_purchases($user_id)
+    {
+        $stmt = $this->prepare('SELECT id, purchase_time, address_id FROM purchase WHERE user_id = ?');
+        $stmt->execute([$user_id]);
+        $purchases = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $purchases[] = $row;
+        }
+
+        foreach ($purchases as $key => $purchase) {
+            $stmt = $this->prepare(<<<'EOT'
+                SELECT
+                    id,
+                    name,
+                    price,
+                    count
+                FROM
+                    purchase_item
+                    JOIN
+                    item
+                    ON purchase_item.item_id = item.id
+                WHERE
+                    purchase_id = ?
+            EOT);
+            $stmt->execute([$purchase['id']]);
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $purchases[$key]['items'][] = $row;
+            }
+        }
+
+        return $purchases;
+    }
 }
