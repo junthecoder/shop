@@ -5,7 +5,7 @@ session_start();
 
 $db = new Database;
 
-$num_items_per_page = 6;
+$num_items_per_page = 10;
 $num_items = $db->count_items();
 $num_pages = ceil($num_items / $num_items_per_page);
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
