@@ -10,13 +10,13 @@ if (!isset($_SESSION['user'])) {
 $db = new Database;
 
 if (isset($_GET['delete'])) {
-  $db->delete_address($_GET['id']);
-  redirect();
+    $db->delete_address($_GET['id']);
+    redirect('address.php');
 }
 
 if (isset($_GET['set_default'])) {
     $db->set_default_address($_SESSION['user']['id'], $_GET['id']);
-    redirect();
+    redirect('address.php');
 }
 
 $addresses = $db->get_addresses($_SESSION['user']['id']);
