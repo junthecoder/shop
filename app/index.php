@@ -3,14 +3,8 @@ require_once('utility.php');
 require_once('database.php');
 session_start();
 
-try {
-    $db = new Database;
-    $items = $db->get_all_items();
-} catch (Exception $e) {
-    print $e;
-} finally {
-    $db = null;
-}
+$db = new Database;
+$items = $db->get_all_items();
 
 ?>
 
