@@ -27,8 +27,8 @@ $purchases = $db->get_purchases($_SESSION['user']['id']);
                     ¥
                     <?php
                       echo array_reduce(
-                        $purchase['items'],
-                        fn ($total, $item) => $total + $item['price'] * $item['count'])
+                          $purchase['items'],
+                          fn ($total, $item) => $total + $item['price'] * $item['count'])
                     ?>
                   </div>
                 </div>
