@@ -258,4 +258,13 @@ class Database extends PDO
 
         return $purchases;
     }
+
+    public function get_items_in_cart()
+    {
+        $items = [];
+        foreach ($_SESSION['cart'] as $cart_item) {
+            $items[$cart_item['id']] = $this->get_item_by_id($cart_item['id']);
+        }
+        return $items;
+    }
 }

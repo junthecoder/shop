@@ -4,6 +4,8 @@ require_once('utility.php');
 require_once('database.php');
 session_start();
 
+$db = new Database;
+
 if (!isset($_SESSION['cart'])) {
   $_SESSION['cart'] = [];
 }
@@ -19,8 +21,6 @@ function find_cart_item_key_by_id($id)
 }
 
 if ($_POST) {
-    $db = new Database;
-
     if (isset($_POST['action'])) {
         switch ($_POST['action']) {
             case 'add':
@@ -44,13 +44,6 @@ if ($_POST) {
     redirect();
 }
 
-$db = new Database;
-$items = [];
-foreach ($_SESSION['cart'] as $cart_item) {
-    $items[$cart_item['id']] = $db->get_item_by_id($cart_item['id']);
-}
-
 echo load_twig()->render('cart.html.twig', [
-  'items' => $items,
-  'total_price' => $total_price
+  'items' => $db->get_items_in_cart()
 ]);
