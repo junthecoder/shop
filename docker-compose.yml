@@ -12,6 +12,12 @@ services:
       - db
     volumes:
       - ./app:/var/www/html/
+  composer:
+    restart: 'no'
+    image: composer:2.5
+    command: install
+    volumes:
+      - .:/app
   db:
     build:
       dockerfile: Dockerfile.db
