@@ -9,7 +9,7 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <?php if (isset($_SESSION['user'])): ?>
             <li class="nav-item">
-              <div class="navbar-text"><?= $_SESSION['user']['name'] ?> さん</div>
+              <a class="nav-link" href="account.php"><?= $_SESSION['user']['name'] ?> さん</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="logout.php">ログアウト</a>
