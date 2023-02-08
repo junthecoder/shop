@@ -1,0 +1,50 @@
+
+<div class="row">
+  <div class="col">
+    {% for cart_item in session.cart %}
+      {% set item = items[cart_item.id] %}
+      {% set total_price = total_price + item.price * cart_item.count %}
+      <div class="card">
+        <div class="d-flex justify-content-between">
+          <img src="/images/200x200.png" class="card-img-left" alt="{{ item.name }}" style="width: 160px; height: 160px">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <h5 class="card-title">{{ item.name }}</h5>
+              <p class="">¥{{ item.price * cart_item.count }}</p>
+            </div>
+            {% if count_changeable %}
+              <form action="cart.php" method="post">
+                <input type="hidden" name="action" value="change_count">
+                <input type="hidden" name="item_id" value="{{ cart_item.id }}">
+                <select name="count" class="form-select form-select-sm" style="width: 5em" onchange="this.form.submit()">
+                  {% for i in 1..10 %}
+                    <option
+                      value="{{ i }}"
+                      {{ (i == cart_item.count) ? 'selected' : '' }}
+                    >
+                      {{ i }}
+                    </option>
+                  {% endfor %}
+                </select>
+              </form>
+            {% else %}
+              数量: {{ cart_item.count }}
+            {% endif %}
+            {% if deletable %}
+              <div class="float-end">
+                <form action="cart.php" method="post">
+                  <input type="hidden" name="action" value="delete">
+                  <input type="hidden" name="item_id" value="{{ item.id }}">
+                  <button type="submit" class="btn btn-danger">削除</button>
+                </form>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    <div class="fs-5 px-2 py-3 text-end">
+      小計 ¥{{ total_price }}
+    </div>
+  </div>
+</div>

@@ -2,7 +2,6 @@
 
 require_once('utility.php');
 require_once('database.php');
-require_once './vendor/autoload.php';
 session_start();
 
 $db = new Database;

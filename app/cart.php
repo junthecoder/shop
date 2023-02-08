@@ -1,4 +1,5 @@
 <?php
+
 require_once('utility.php');
 require_once('database.php');
 session_start();
@@ -43,24 +44,13 @@ if ($_POST) {
     redirect();
 }
 
-?>
+$db = new Database;
+$items = [];
+foreach ($_SESSION['cart'] as $cart_item) {
+    $items[$cart_item['id']] = $db->get_item_by_id($cart_item['id']);
+}
 
-<?php include_template('pre_body.php', ['title' => 'ショッピングカート']) ?>
-  <?php include 'header.php' ?>
-  <div class="container m-5">
-    <div class="row">
-      <h3 class="p-3">ショッピングカート</h3>
-    </div>
-    <?php if (empty($_SESSION['cart'])): ?>
-      <p>カートに商品はありません</p>
-    <?php else: ?>
-      <?php include_template('cart_items.php', ['deletable' => true, 'count_changeable' => true]) ?>
-      <div class="row p-2 float-end">
-        <form action="checkout.php" method="post">
-          <input type="hidden" name="action" value="default">
-          <button type="submit" class="btn btn-warning py-2">レジに進む</button>
-        </form>
-      </div>
-    <?php endif ?>
-  </div>
-<?php include_template('post_body.php') ?>
+echo load_twig()->render('cart.html.twig', [
+  'items' => $items,
+  'total_price' => $total_price
+]);

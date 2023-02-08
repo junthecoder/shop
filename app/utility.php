@@ -31,11 +31,14 @@ function ensure_login()
 
 function load_twig()
 {
+    require_once './vendor/autoload.php';
+
     $loader = new \Twig\Loader\FilesystemLoader('./templates');
     $twig = new \Twig\Environment($loader, [
         'cache' => './cache',
         'auto_reload' => true
     ]);
     $twig->addGlobal('session', $_SESSION);
+
     return $twig;
 }
