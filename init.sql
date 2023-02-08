@@ -122,6 +122,17 @@ INSERT INTO item (name, price) VALUES ('Product #11', 1100);
 INSERT INTO item (name, price) VALUES ('Product #12', 1200);
 INSERT INTO item (name, price) VALUES ('Product #13', 1300);
 INSERT INTO item (name, price) VALUES ('Product #14', 1400);
+INSERT INTO item (name, price) VALUES ('Product #15', 1500);
+INSERT INTO item (name, price) VALUES ('Product #16', 1600);
+INSERT INTO item (name, price) VALUES ('Product #17', 1700);
+INSERT INTO item (name, price) VALUES ('Product #18', 1800);
+INSERT INTO item (name, price) VALUES ('Product #19', 1900);
+INSERT INTO item (name, price) VALUES ('Product #20', 2000);
+INSERT INTO item (name, price) VALUES ('Product #21', 2100);
+INSERT INTO item (name, price) VALUES ('Product #22', 2200);
+INSERT INTO item (name, price) VALUES ('Product #23', 2300);
+INSERT INTO item (name, price) VALUES ('Product #24', 2400);
+INSERT INTO item (name, price) VALUES ('Product #25', 2500);
 
 # Test user (password: a)
 INSERT INTO user (email, password, name) VALUES ('taro@example.com', '$2y$10$/ofLZYZYS1Blv6zAXMUV8.Q6sMUE6DP/b8bxfLYCBVaR3u.4CQEwS', '山田 太郎');
