@@ -4,7 +4,13 @@ require_once('database.php');
 session_start();
 
 $db = new Database;
-$items = $db->get_all_items();
+
+$num_items_per_page = 6;
+$num_items = $db->count_items();
+$num_pages = ceil($num_items / $num_items_per_page);
+$current_page = $_GET['page'];
+
+$items = $db->get_items_batch($num_items_per_page * ($current_page - 1), $num_items_per_page);
 
 ?>
 
@@ -32,6 +38,21 @@ $items = $db->get_all_items();
           </div>
         </div>
       <?php endforeach ?>
+    </div>
+    <div class="row my-4">
+      <ul class="pagination justify-content-center">
+        <li class="page-item <?= ($current_page == 1) ? 'disabled' : '' ?>">
+          <a class="page-link" href="/">前へ</a>
+        </li>
+        <?php for ($i = 1; $i <= $num_pages; ++$i): ?>
+          <li class="page-item <?= ($i == $current_page) ? 'active' : '' ?>">
+            <a class="page-link" href="/?page=<?= $i ?>"><?= $i ?></a>
+          </li>
+        <?php endfor ?>
+        <li class="page-item <?= ($current_page == $num_pages) ? 'disabled' : '' ?>">
+          <a class="page-link" href="/?page=<?= $current_page + 1 ?>">次へ</a>
+        </li>
+      </ul>
     </div>
   </div>
 <?php include_template('post_body.php') ?>

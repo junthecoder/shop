@@ -12,9 +12,30 @@ class Database extends PDO
         );
     }
 
+    public function count_items()
+    {
+        $sql = 'SELECT COUNT(*) AS num_items FROM item';
+        $stmt = $this->prepare($sql);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int)$row['num_items'];
+    }
+
     public function get_all_items()
     {
         $sql = 'SELECT id, name, price FROM item';
+        $stmt = $this->prepare($sql);
+        $stmt->execute();
+        $items = [];
+        while ($rec = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $items[] = $rec;
+        }
+        return $items;
+    }
+
+    public function get_items_batch($offset, $limit)
+    {
+        $sql = "SELECT id, name, price FROM item LIMIT $offset, $limit";
         $stmt = $this->prepare($sql);
         $stmt->execute();
         $items = [];
