@@ -5,13 +5,6 @@ require_once('database.php');
 require_once './vendor/autoload.php';
 session_start();
 
-$loader = new \Twig\Loader\FilesystemLoader('./templates');
-$twig = new \Twig\Environment($loader, [
-    'cache' => './cache',
-    'auto_reload' => true
-]);
-$twig->addGlobal('session', $_SESSION);
-
 $db = new Database;
 
 $num_items_per_page = 10;
@@ -27,7 +20,7 @@ if (isset($_SESSION['cart'])) {
   $num_cart_items = 0;
 }
 
-echo $twig->render('index.html.twig', [
+echo load_twig()->render('index.html.twig', [
   'items' => $items,
   'num_cart_items' => $num_cart_items,
   'num_items_per_page' => $num_items_per_page,
