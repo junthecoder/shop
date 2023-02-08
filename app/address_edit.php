@@ -13,14 +13,33 @@ if (isset($_POST['cancel_button'])) {
 
 if (isset($_POST['save_button'])) {
     $db = new Database;
-    $db->update_address($_POST['id'], $_POST);
+    if (isset($_POST['id'])) {
+        $db->update_address($_POST['id'], $_POST);
+    } else {
+        $db->add_address($_SESSION['user']['id'], $_POST);
+    }
     redirect('addresses.php');
 }
 
 $db = new Database;
-$address = $db->get_address($_GET['id']);
-if ($address === false) {
-    die("住所のIDが不正です。");
+
+if (isset($_GET['id'])) {
+    $address = $db->get_address($_GET['id']);
+    if ($address === false) {
+        die("住所のIDが不正です。");
+    }
+} else {
+  $address = [
+      'id' => null,
+      'full_name' => $_SESSION['user']['name'],
+      'phone_number' => '',
+      'postal_code' => '',
+      'prefecture_id' => '',
+      'address_line1' => '',
+      'address_line2' => '',
+      'address_line3' => '',
+      'address_line4' => ''
+  ];
 }
 
 $prefectures = $db->get_prefectures();
@@ -30,7 +49,7 @@ $prefectures = $db->get_prefectures();
 <?php include_template('pre_body.php', ['title' => '住所']) ?>
   <?php include 'header.php' ?>
   <div class="container p-4">
-    <form action="addresses_edit.php" method="post">
+    <form action="address_edit.php" method="post">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="full_name_input" placeholder="氏名" name="full_name" value="<?= $address['full_name'] ?>">
         <label for="full_name_input">氏名</label>
@@ -75,7 +94,9 @@ $prefectures = $db->get_prefectures();
       </div>
       <div class="row p-2 float-end">
         <div class="col">
-          <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
+          <?php if (isset($_GET['id'])): ?>
+            <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
+          <?php endif ?>
           <input type="submit" class="btn btn-secondary mx-1" name="cancel_button" value="キャンセル">
           <input type="submit" class="btn btn-primary mx-1" name="save_button" value="保存する">
         </div>

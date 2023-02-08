@@ -124,6 +124,40 @@ class Database extends PDO
         return $prefectures;
     }
 
+    public function add_address($user_id, $map)
+    {
+        $stmt = $this->prepare(<<<'EOT'
+            INSERT INTO address (
+                full_name,
+                phone_number,
+                postal_code,
+                prefecture_id,
+                address_line1,
+                address_line2,
+                address_line3,
+                address_line4
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        EOT);
+
+        $stmt->execute([
+            $map['full_name'],
+            $map['phone_number'],
+            $map['postal_code'],
+            $map['prefecture_id'],
+            $map['address_line1'],
+            $map['address_line2'],
+            $map['address_line3'],
+            $map['address_line4']
+        ]);
+
+        $address_id = $this->lastInsertId();
+
+        $stmt = $this->prepare('INSERT INTO user_address (user_id, address_id) VALUES (?, ?)');
+        $stmt->execute([$user_id, $address_id]);
+
+        return $address_id;
+    }
+
     public function update_address($address_id, $map)
     {
         $stmt = $this->prepare(<<<'EOT'

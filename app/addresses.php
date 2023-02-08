@@ -27,6 +27,11 @@ $default_address_id = $db->get_default_address_id($_SESSION['user']['id']);
 <?php include_template('pre_body.php', ['title' => '住所']) ?>
   <?php include 'header.php' ?>
   <div class="container p-4">
+    <div class="row row-cols-auto py-4 g-4">
+      <div class="col">
+        <a href="address_edit.php" class="btn btn-primary">追加</a>
+      </div>
+    </div>
     <div class="row row-cols-auto g-4">
       <?php foreach ($addresses as $address): ?>
         <?php $is_default_address = ($address['id'] == $default_address_id) ?>
