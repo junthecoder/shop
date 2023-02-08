@@ -23,8 +23,7 @@ $links = [
           <div class="card mb-3" style="width: 320px; height: 80px;">
             <div class="row g-0">
               <div class="card-body">
-                <h5 class="card-title" style="font-family: Meiryo;"><?= $link['title'] ?></h5>
-                <!-- <a href="<?= $link['href'] ?>" class="stretched-link">aaaaa</a> -->
+                <h6 class="card-title fw-bold" style="font-family: Meiryo;"><?= $link['title'] ?></h6>
                 <a href="<?= $link['href'] ?>" class="stretched-link"></a>
               </div>
             </div>
