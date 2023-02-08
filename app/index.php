@@ -8,7 +8,7 @@ $db = new Database;
 $num_items_per_page = 6;
 $num_items = $db->count_items();
 $num_pages = ceil($num_items / $num_items_per_page);
-$current_page = $_GET['page'];
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
 
 $items = $db->get_items_batch($num_items_per_page * ($current_page - 1), $num_items_per_page);
 
