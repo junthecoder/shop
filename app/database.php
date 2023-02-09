@@ -27,8 +27,8 @@ class Database extends PDO
         $stmt = $this->prepare($sql);
         $stmt->execute();
         $items = [];
-        while ($rec = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $items[] = $rec;
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $items[] = $row;
         }
         return $items;
     }
@@ -39,8 +39,8 @@ class Database extends PDO
         $stmt = $this->prepare($sql);
         $stmt->execute();
         $items = [];
-        while ($rec = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $items[] = $rec;
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $items[] = $row;
         }
         return $items;
     }
