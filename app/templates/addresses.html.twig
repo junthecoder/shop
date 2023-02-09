@@ -1,0 +1,38 @@
+{% include 'pre_body.html.twig' with {'title': 'アドレス帳'} %}
+{% include 'header.html.twig' %}
+  <div class="container p-4">
+    <div class="row row-cols-auto py-4 g-4">
+      <div class="col">
+        <a href="address_edit.php" class="btn btn-primary">追加</a>
+      </div>
+    </div>
+    <div class="row row-cols-auto g-4">
+      {% for address in addresses %}
+        {% set is_default_address = (address.id == default_address_id) %}
+        <div class="col">
+          <div class="card {{ is_default_address ? 'border-primary' : '' }}" style="width: 18rem;">
+            <div class="card-body">
+              <h6 class="card-title fw-bold">
+                {{ address.full_name }}
+              </h6>
+              <p class="card-text">
+                {{ address.postal_code }}<br>
+                {{ address.prefecture }}<br>
+                {{ address.address_line1 }}
+                {{ address.address_line2 }}<br>
+                {{ address.address_line3 }}
+                {{ address.address_line4 }}<br>
+                {{ address.phone_number }}
+              </p>
+              <a class="fs-7" href="address_edit.php?id={{ address.id }}">変更</a>
+              {% if not is_default_address %}
+                <a href="/addresses.php/?delete=1&id={{ address.id }}">削除</a>
+                <a href="/addresses.php/?set_default=1&id={{ address.id }}">規定の住所に設定</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% include 'post_body.html.twig' %}
