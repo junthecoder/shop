@@ -1,9 +1,9 @@
+{% set header = true %}
 {% extends 'base.html.twig' %}
 
 {% block title %}注文履歴{% endblock %}
 
 {% block body %}
-  {% include 'header.html.twig' %}
   <div class="container px-3 py-5 g-4">
     <div class="row">
       {% for purchase in purchases %}

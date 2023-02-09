@@ -1,9 +1,9 @@
+{% set header = true %}
 {% extends 'base.html.twig' %}
 
 {% block title %}トップページ{% endblock %}
 
 {% block body %}
-  {% include 'header.html.twig' %}
   <div class="container px-3 py-5">
     <div class="row row-cols-auto g-4">
       {% for item in items %}
