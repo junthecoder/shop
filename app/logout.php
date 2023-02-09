@@ -1,4 +1,5 @@
 <?php
+
 require_once('utility.php');
 session_start();
 
@@ -11,14 +12,4 @@ if (isset($_SESSION['user'])) {
     redirect('index.php');
 }
 
-?>
-
-<?php include_template('pre_body.php', ['title' => 'ログアウト']) ?>
-  <div class="container p-5" style="width: 450px;">
-    <script>
-      setTimeout(() => { document.location = '/'; }, 3000);
-    </script>
-    <p>ログアウトしました</p>
-    <a href="/">トップページへ</a>
-  </div>
-<?php include_template('post_body.php') ?>
+echo load_twig()->render('logout.html.twig');

@@ -1,0 +1,9 @@
+{% include 'pre_body.html.twig' with {'title': 'ログアウト'} %}
+  <div class="container p-5" style="width: 450px;">
+    <script>
+      setTimeout(() => { document.location = '/'; }, 3000);
+    </script>
+    <p>ログアウトしました</p>
+    <a href="/">トップページへ</a>
+  </div>
+{% include 'post_body.html.twig' %}
