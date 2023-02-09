@@ -1,4 +1,8 @@
-{% include 'pre_body.html.twig' with {'title': 'ログイン'} %}
+{% extends 'base.html.twig' %}
+
+{% block title %}ログイン{% endblock %}
+
+{% block body %}
   <div class="container p-5" style="width: 450px;">
     {% if success %}
       <script>
@@ -30,4 +34,4 @@
       </form>
     {% endif %}
   </div>
-{% include 'post_body.html.twig' %}
+{% endblock %}

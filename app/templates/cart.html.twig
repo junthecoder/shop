@@ -1,5 +1,9 @@
-{% include 'pre_body.html.twig' with {'title': 'ショッピングカート'} %}
-{% include 'header.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block title %}ショッピングカート{% endblock %}
+
+{% block body %}
+  {% include 'header.html.twig' %}
   <div class="container m-5">
     <div class="row">
       <h3 class="p-3">ショッピングカート</h3>
@@ -16,4 +20,4 @@
       </div>
     {% endif %}
   </div>
-{% include 'post_body.html.twig' %}
+{% endblock %}

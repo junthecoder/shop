@@ -1,5 +1,9 @@
-{% include 'pre_body.html.twig' with {'title': '住所'} %}
-{% include 'header.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block title %}住所{% endblock %}
+
+{% block body %}
+  {% include 'header.html.twig' %}
   <div class="container p-4">
     <form action="address_edit.php" method="post">
       <div class="form-floating mb-3">
@@ -54,4 +58,4 @@
       </div>
     </form>
   </div>
-{% include 'post_body.html.twig' %}
+{% endblock %}

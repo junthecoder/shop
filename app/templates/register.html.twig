@@ -1,4 +1,8 @@
-{% include 'pre_body.html.twig' with {'title': 'ユーザ登録'} %}
+{% extends 'base.html.twig' %}
+
+{% block title %}ユーザ登録{% endblock %}
+
+{% block body %}
   <div class="container p-5" style="max-width: 480px;">
     {% if register %}
       <p>ユーザ登録を完了しました。</p>
@@ -59,4 +63,4 @@
     {% endif %}
   </div>
   <script src="/scripts/register.js"></script>
-{% include 'post_body.html.twig' %}
+{% endblock %}

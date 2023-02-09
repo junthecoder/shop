@@ -1,5 +1,8 @@
-{% include 'pre_body.html.twig' with {'title': 'トップページ'} %}
-{% include 'header.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block title %}トップページ{% endblock %}
+
+{% block body %}
   <div class="container px-3 py-5">
     <div class="row row-cols-auto g-4">
       {% for item in items %}
@@ -39,4 +42,4 @@
       </ul>
     </div>
   </div>
-{% include 'post_body.html.twig' %}
+{% endblock %}

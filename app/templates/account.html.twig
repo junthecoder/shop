@@ -1,3 +1,5 @@
+{% extends 'base.html.twig' %}
+
 {%
   set links = [
     {'title': '注文履歴', 'href': 'orders.php'},
@@ -6,8 +8,10 @@
   ]
 %}
 
-{% include 'pre_body.html.twig' with {'title': 'アカウント'} %}
-{% include 'header.html.twig' %}
+{% block title %}アカウント{% endblock %}
+
+{% block body %}
+  {% include 'header.html.twig' %}
   <div class="container px-3 py-5">
     <div class="row row-cols-auto g-4">
       {% for link in links %}
@@ -24,4 +28,4 @@
       {% endfor %}
     </div>
   </div>
-{% include 'post_body.html.twig' %}
+{% endblock %}
