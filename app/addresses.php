@@ -47,7 +47,7 @@ $default_address_id = $db->get_default_address_id($_SESSION['user']['id']);
                 <?= $address['address_line4'] ?><br>
                 <?= $address['phone_number'] ?>
               </p>
-              <a class="fs-7" href="addresses_edit.php?id=<?= $address['id'] ?>">変更</a>
+              <a class="fs-7" href="address_edit.php?id=<?= $address['id'] ?>">変更</a>
               <?php if (!$is_default_address): ?>
                 <a href="/addresses.php/?delete=1&id=<?= $address['id'] ?>">削除</a>
                 <a href="/addresses.php/?set_default=1&id=<?= $address['id'] ?>">規定の住所に設定</a>
