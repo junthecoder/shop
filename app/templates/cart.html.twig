@@ -8,7 +8,7 @@
     <div class="row">
       <h3 class="p-3">ショッピングカート</h3>
     </div>
-    {% if not session.cart is defined %}
+    {% if session.cart is empty %}
       <p>カートに商品はありません</p>
     {% else %}
       {% include 'cart_items.html.twig' with {'deletable': true, 'count_changeable': true} %}
