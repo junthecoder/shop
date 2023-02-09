@@ -18,6 +18,6 @@ function validate_email($email)
     return [];
 }
 
-if ($_POST['email']) {
+if (isset($_POST['email'])) {
     echo json_encode(array_values(validate_email($_POST['email'])));
 }
