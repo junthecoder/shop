@@ -1,0 +1,45 @@
+{% include 'pre_body.html.twig' with {'title': '注文履歴'} %}
+{% include 'header.html.twig' %}
+  <div class="container px-3 py-5 g-4">
+    <div class="row">
+      {% for purchase in purchases %}
+        <div class="col">
+          <div class="card">
+            <div class="card-header">
+              <div class="container">
+                <div class="row">
+                  <div class="col-6">
+                    注文日<br>
+                    {{ purchase.purchase_time }}
+                  </div>
+                  <div class="col-6 text-end">
+                    合計<br>
+                    ¥{{ purchase.total }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="container g-4">
+              {% for item in purchase.items %}
+                <div class="row row-cols-auto py-1">
+                  <div class="col-4">
+                    <img src="/images/200x200.png" class="rounded" alt="{{ item.name }}" style="width: 120px; height: 120px">
+                  </div>
+                  <div class="col-4">
+                    <h6 class="card-text">{{ item.name }}</h6>
+                    <p class="card-text">数量: {{ item.count }}</p>
+                  </div>
+                  <div class="col-4">
+                    <p class="card-text text-end">¥{{ item.price * item.count }}</p>
+                  </div>
+                </div>
+              {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% include 'post_body.html.twig' %}
