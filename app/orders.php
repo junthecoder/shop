@@ -1,7 +1,8 @@
 <?php
 
-require_once('utility.php');
-require_once('database.php');
+require_once'utility.php';
+require_once 'database.php';
+
 session_start();
 ensure_login();
 
@@ -12,10 +13,10 @@ foreach ($purchases as $key => $purchase) {
     $purchases[$key]['purchase_time'] = date("Y年m月d日", strtotime($purchase['purchase_time']));
     $purchases[$key]['total'] = array_reduce(
         $purchase['items'],
-        fn($total, $item) => $total + $item['price'] * $item['count']
+        fn ($total, $item) => $total + $item['price'] * $item['count']
     );
 }
 
 echo load_twig()->render('orders.html.twig', [
-    'purchases' => $purchases
+    'purchases' => $purchases,
 ]);

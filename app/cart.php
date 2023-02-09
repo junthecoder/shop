@@ -1,13 +1,14 @@
 <?php
 
-require_once('utility.php');
-require_once('database.php');
+require_once 'utility.php';
+require_once 'database.php';
+
 session_start();
 
 $db = new Database;
 
 if (!isset($_SESSION['cart'])) {
-  $_SESSION['cart'] = [];
+    $_SESSION['cart'] = [];
 }
 
 function find_cart_item_key_by_id($id)
@@ -36,7 +37,7 @@ if ($_POST) {
                 $_SESSION['cart'][$key]['count'] = $_POST['count'];
                 break;
             case 'delete':
-                $_SESSION['cart'] = array_filter($_SESSION['cart'], fn($item) => $item['id'] != $_POST['item_id']);
+                $_SESSION['cart'] = array_filter($_SESSION['cart'], fn ($item) => $item['id'] != $_POST['item_id']);
                 break;
         }
     }
@@ -45,5 +46,5 @@ if ($_POST) {
 }
 
 echo load_twig()->render('cart.html.twig', [
-  'items' => $db->get_items_in_cart()
+    'items' => $db->get_items_in_cart(),
 ]);

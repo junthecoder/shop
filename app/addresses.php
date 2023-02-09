@@ -1,7 +1,8 @@
 <?php
 
-require_once('utility.php');
-require_once('database.php');
+require_once 'utility.php';
+require_once 'database.php';
+
 session_start();
 ensure_login();
 
@@ -21,6 +22,6 @@ $addresses = $db->get_addresses($_SESSION['user']['id']);
 $default_address_id = $db->get_default_address_id($_SESSION['user']['id']);
 
 echo load_twig()->render('addresses.html.twig', [
-  'addresses' => $addresses,
-  'default_address_id' => $default_address_id
+    'addresses' => $addresses,
+    'default_address_id' => $default_address_id,
 ]);

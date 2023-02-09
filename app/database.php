@@ -18,7 +18,7 @@ class Database extends PDO
         $stmt = $this->prepare($sql);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        return (int)$row['num_items'];
+        return (int) $row['num_items'];
     }
 
     public function get_all_items()
@@ -136,7 +136,7 @@ class Database extends PDO
 
     public function get_prefectures()
     {
-        $stmt = $this->prepare('SELECT id, name FROM prefecture');;
+        $stmt = $this->prepare('SELECT id, name FROM prefecture');
         $stmt->execute();
         $prefectures = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -168,7 +168,7 @@ class Database extends PDO
             $map['address_line1'],
             $map['address_line2'],
             $map['address_line3'],
-            $map['address_line4']
+            $map['address_line4'],
         ]);
 
         $address_id = $this->lastInsertId();
@@ -206,7 +206,7 @@ class Database extends PDO
             $map['address_line2'],
             $map['address_line3'],
             $map['address_line4'],
-            $address_id
+            $address_id,
         ]);
     }
 
@@ -244,9 +244,7 @@ class Database extends PDO
                     count
                 FROM
                     purchase_item
-                    JOIN
-                    item
-                    ON purchase_item.item_id = item.id
+                    JOIN item ON purchase_item.item_id = item.id
                 WHERE
                     purchase_id = ?
             EOT);

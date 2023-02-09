@@ -1,7 +1,8 @@
 <?php
 
-require_once('utility.php');
-require_once('database.php');
+require_once 'utility.php';
+require_once 'database.php';
+
 session_start();
 
 default_value($_POST, 'name', '');
@@ -36,5 +37,5 @@ if ($register) {
 echo load_twig()->render('register.html.twig', [
     'check' => $check,
     'register' => $register,
-    'post' => $post
+    'post' => $post,
 ]);

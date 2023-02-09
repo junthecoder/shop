@@ -1,7 +1,8 @@
 <?php
 
-require_once('utility.php');
-require_once('database.php');
+require_once 'utility.php';
+require_once 'database.php';
+
 session_start();
 ensure_login();
 
@@ -37,9 +38,12 @@ function concat_address($a)
     return sprintf(
         '%s, 〒%s, %s %s %s %s %s, 電話番号: %s',
         $a['full_name'],
-        $a['postal_code'], $a['prefecture'],
-        $a['address_line1'], $a['address_line2'],
-        $a['address_line3'], $a['address_line4'],
+        $a['postal_code'],
+        $a['prefecture'],
+        $a['address_line1'],
+        $a['address_line2'],
+        $a['address_line3'],
+        $a['address_line4'],
         $a['phone_number']
     );
 }
@@ -56,5 +60,5 @@ echo load_twig()->render('checkout.html.twig', [
     'items' => $db->get_items_in_cart(),
     'addresses' => $addresses,
     'default_address_id' => $default_address_id,
-    'post' => $_POST
+    'post' => $_POST,
 ]);

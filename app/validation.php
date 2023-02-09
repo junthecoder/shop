@@ -1,6 +1,7 @@
 <?php
-require_once('utility.php');
-require_once('database.php');
+
+require_once 'utility.php';
+require_once 'database.php';
 
 function validate_email($email)
 {

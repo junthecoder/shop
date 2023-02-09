@@ -36,7 +36,7 @@ function load_twig()
     $loader = new \Twig\Loader\FilesystemLoader('./templates');
     $twig = new \Twig\Environment($loader, [
         'cache' => './cache',
-        'auto_reload' => true
+        'auto_reload' => true,
     ]);
     $twig->addGlobal('session', $_SESSION);
 

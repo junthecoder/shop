@@ -1,7 +1,8 @@
 <?php
 
-require_once('utility.php');
-require_once('database.php');
+require_once 'utility.php';
+require_once 'database.php';
+
 session_start();
 
 $success = false;
@@ -20,5 +21,5 @@ if ($_POST) {
 }
 
 echo load_twig()->render('login.html.twig', [
-  'success' => $success
+    'success' => $success,
 ]);
