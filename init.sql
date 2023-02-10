@@ -1,7 +1,8 @@
 CREATE TABLE item (
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     name NVARCHAR(128),
-    price INT
+    price INT,
+    time_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE prefecture (

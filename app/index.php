@@ -20,10 +20,10 @@ switch ($_GET['sort'] ?? 'recommended') {
         $order = 'price DESC';
         break;
     case 'date-asc':
-        $order = 'date';
+        $order = 'time_created';
         break;
     case 'date-desc':
-        $order = 'date DESC';
+        $order = 'time_created DESC';
         break;
     case 'recommended':
     default:
