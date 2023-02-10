@@ -12,7 +12,25 @@ $num_items = $db->count_items();
 $num_pages = ceil($num_items / $num_items_per_page);
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
 
-$items = $db->get_items_batch($num_items_per_page * ($current_page - 1), $num_items_per_page);
+switch ($_GET['sort'] ?? 'recommended') {
+    case 'price-asc':
+        $order = 'price';
+        break;
+    case 'price-desc':
+        $order = 'price DESC';
+        break;
+    case 'date-asc':
+        $order = 'date';
+        break;
+    case 'date-desc':
+        $order = 'date DESC';
+        break;
+    case 'recommended':
+    default:
+        $order = 'id';
+        break;
+}
+$items = $db->get_items_batch($num_items_per_page * ($current_page - 1), $num_items_per_page, $order);
 
 if (isset($_SESSION['cart'])) {
     $num_cart_items = array_reduce($_SESSION['cart'], fn ($sum, $item) => $sum + $item['count'], 0);

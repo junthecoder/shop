@@ -33,9 +33,9 @@ class Database extends PDO
         return $items;
     }
 
-    public function get_items_batch($offset, $limit)
+    public function get_items_batch($offset, $limit, $order)
     {
-        $sql = "SELECT id, name, price FROM item LIMIT $offset, $limit";
+        $sql = "SELECT id, name, price FROM item ORDER BY $order LIMIT $offset, $limit";
         $stmt = $this->prepare($sql);
         $stmt->execute();
         $items = [];
