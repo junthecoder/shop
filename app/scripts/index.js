@@ -6,9 +6,9 @@ if (sortType) {
 }
 
 $('#sort-select').on('change', function () {
-    const sortType = $(this).val();
-    if (sortType) {
-        window.location = `/?sort=${sortType}`
-    }
-    return false;
+  const sortType = $(this).val();
+  if (sortType) {
+      window.location = `/?sort=${sortType}`
+  }
+  return false;
 });

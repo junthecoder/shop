@@ -10,7 +10,7 @@
           <div class="card-body">
             <div class="d-flex justify-content-between">
               <h5 class="card-title">{{ item.name }}</h5>
-              <p class="">¥{{ item.price * cart_item.count }}</p>
+              <p class="price">{{ item.price * cart_item.count }}</p>
             </div>
             {% if count_changeable %}
               <form action="cart.php" method="post">
@@ -44,7 +44,8 @@
       </div>
     {% endfor %}
     <div class="fs-5 px-2 py-3 text-end">
-      小計 ¥{{ total_price }}
+      <span>小計</span>
+      <span class="price">{{ total_price }}</span>
     </div>
   </div>
 </div>

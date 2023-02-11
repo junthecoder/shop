@@ -27,7 +27,7 @@
               <a href="/item.php?id={{ item.id }}">
                 <h5 class="card-title">{{ item.name }}</h5>
               </a>
-              <p class="card-text">¥{{ item.price }}</p>
+              <p class="card-text price">{{ item.price }}</p>
             </div>
             <form action="cart.php" method="post">
               <input type="hidden" name="action" value="add">
