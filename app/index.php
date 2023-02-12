@@ -11,8 +11,9 @@ $num_items_per_page = 10;
 $num_items = $db->count_items();
 $num_pages = ceil($num_items / $num_items_per_page);
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+$sort_type = $_GET['sort'] ?? 'recommended';
 
-switch ($_GET['sort'] ?? 'recommended') {
+switch ($sort_type) {
     case 'price-asc':
         $order = 'price';
         break;
@@ -44,4 +45,5 @@ echo load_twig()->render('index.html.twig', [
     'num_items_per_page' => $num_items_per_page,
     'num_pages' => $num_pages,
     'current_page' => $current_page,
+    'sort_type' => $sort_type,
 ]);

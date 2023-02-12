@@ -45,15 +45,15 @@
     <div class="row my-4">
       <ul class="pagination justify-content-center">
         <li class="page-item {{ (current_page == 1) ? 'disabled' : '' }}">
-          <a class="page-link" href="/?page={{ current_page - 1 }}">前へ</a>
+          <a class="page-link" href="/?page={{ current_page - 1 }}&sort={{ sort_type }}">前へ</a>
         </li>
         {% for i in 1..num_pages %}
           <li class="page-item {{ (i == current_page) ? 'active' : '' }}">
-            <a class="page-link" href="/?page={{ i }}">{{ i }}</a>
+            <a class="page-link" href="/?page={{ i }}&sort={{ sort_type }}">{{ i }}</a>
           </li>
         {% endfor %}
         <li class="page-item {{ (current_page == num_pages) ? 'disabled' : '' }}">
-          <a class="page-link" href="/?page={{ current_page + 1 }}">次へ</a>
+          <a class="page-link" href="/?page={{ current_page + 1 }}&sort={{ sort_type }}">次へ</a>
         </li>
       </ul>
     </div>
