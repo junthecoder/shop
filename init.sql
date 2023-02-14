@@ -2,6 +2,7 @@ CREATE TABLE item (
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     name NVARCHAR(128),
     price INT,
+    description TEXT,
     time_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -116,7 +117,7 @@ INSERT INTO prefecture (id, name) VALUES (450, '鹿児島県');
 INSERT INTO prefecture (id, name) VALUES (460, '沖縄県');
 
 # Test items
-INSERT INTO item (name, price) VALUES ('Product #1', 100);
+INSERT INTO item (name, price) VALUES ('Product #1', 100, 'Production description 1');
 INSERT INTO item (name, price) VALUES ('Product #2', 200);
 INSERT INTO item (name, price) VALUES ('Product #3', 300);
 INSERT INTO item (name, price) VALUES ('Product #4', 400);

@@ -23,7 +23,7 @@ class Database extends PDO
 
     public function get_all_items()
     {
-        $sql = 'SELECT id, name, price FROM item';
+        $sql = 'SELECT * FROM item';
         $stmt = $this->prepare($sql);
         $stmt->execute();
         $items = [];
@@ -35,7 +35,7 @@ class Database extends PDO
 
     public function get_items_batch($offset, $limit, $order)
     {
-        $sql = "SELECT id, name, price FROM item ORDER BY $order LIMIT $offset, $limit";
+        $sql = "SELECT * FROM item ORDER BY $order LIMIT $offset, $limit";
         $stmt = $this->prepare($sql);
         $stmt->execute();
         $items = [];
@@ -47,7 +47,7 @@ class Database extends PDO
 
     public function get_items_by_ids($item_ids)
     {
-        $sql = 'SELECT id, name, price FROM item WHERE id = ?';
+        $sql = 'SELECT * FROM item WHERE id = ?';
         $stmt = $this->prepare($sql);
         $items = [];
         foreach ($item_ids as $item_id) {

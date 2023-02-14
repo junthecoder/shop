@@ -32,6 +32,9 @@
       </div>
       <div class="col">
         <h3>{{ item.name }}</h3>
+        <div class="mt-4">
+          {{ item.description | nl2br }}
+        </div>
       </div>
       <div class="col col-md-auto">
         <div class="fs-4 mb-3 price" style="color: #ff0072;">{{ item.price }}</div>
