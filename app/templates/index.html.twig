@@ -24,9 +24,9 @@
                 {% set image_path = (item.images is empty) ? '/images/200x200.png' : '/images/items/' ~ item.images[0].filename %}
                 <img src="{{ image_path }}" class="card-img-top" alt="{{ item.name }}?>">
               </a>
-            <div class="card-body">
+            <div class="card-body" style="height: 140px;">
               <a href="/item.php?id={{ item.id }}">
-                <h5 class="card-title">{{ item.name }}</h5>
+                <h6 class="card-title">{{ item.name }}</h6>
               </a>
               <p class="card-text price">{{ item.price }}</p>
             </div>
