@@ -5,6 +5,13 @@ CREATE TABLE item (
     time_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE image (
+    image_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    item_id INT UNSIGNED NOT NULL,
+    filename VARCHAR(32) NOT NULL,
+    FOREIGN KEY (item_id) REFERENCES item(id)
+);
+
 CREATE TABLE prefecture (
     id INT UNSIGNED PRIMARY KEY,
     name NCHAR(8)

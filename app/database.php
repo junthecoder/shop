@@ -63,6 +63,19 @@ class Database extends PDO
         return $this->get_items_by_ids([$item_id])[0];
     }
 
+    public function get_item_images($item_id)
+    {
+        $sql = 'SELECT image_id, item_id, filename FROM image WHERE item_id = ?';
+        $stmt = $this->prepare($sql);
+        $stmt->execute([$item_id]);
+
+        $images = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $images[] = $row;
+        }
+        return $images;
+    }
+
     public function get_addresses($user_id)
     {
         $stmt = $this->prepare(<<<'EOT'
