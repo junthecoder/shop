@@ -14,7 +14,7 @@ if ($_POST) {
     if ($success) {
         session_regenerate_id(true);
         $_SESSION['user'] = $row;
-        redirect('index.php');
+        redirect($_POST['redirect_url'] ?? 'index.php');
     } else {
         redirect(add_to_history: false);
     }
@@ -22,4 +22,5 @@ if ($_POST) {
 
 echo load_twig()->render('login.html.twig', [
     'success' => $success,
+    'redirect_url' => $_SERVER['HTTP_REFERER'] ?? null,
 ]);
