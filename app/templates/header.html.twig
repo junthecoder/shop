@@ -22,8 +22,11 @@
           <li class="nav-item">
             <a class="nav-link" href="cart.php">
               カート
-              {% if num_cart_items != 0 %}
-              ({{ num_cart_items }})
+              {% if not session.cart is empty %}
+                {% set num_cart_items = session.cart | reduce((n, item) => n + item.count) %}
+                {% if num_cart_items != 0 %}
+                  ({{ num_cart_items }})
+                {% endif %}
               {% endif %}
             </a>
           </li>
