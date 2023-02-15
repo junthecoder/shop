@@ -33,10 +33,6 @@ switch ($sort_type) {
 }
 $items = $db->get_items_batch($num_items_per_page * ($current_page - 1), $num_items_per_page, $order);
 
-foreach ($items as $key => $item) {
-    $items[$key]['images'] = $db->get_item_images($item['id']);
-}
-
 if (isset($_SESSION['cart'])) {
     $num_cart_items = array_reduce($_SESSION['cart'], fn ($sum, $item) => $sum + $item['count'], 0);
 } else {

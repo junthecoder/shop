@@ -9,12 +9,12 @@
       <div class="col">
         <div id="carousel" class="carousel slide">
           <div class="carousel-indicators">
-            {% for item_image in item_images %}
+            {% for item_image in item.images %}
               <button type="button" data-bs-target="#carousel" data-bs-slide-to="{{ loop.index0 }}" class="{{ loop.first ? 'active' : '' }}"></button>
             {% endfor %}
           </div>
           <div class="carousel-inner">
-            {% for item_image in item_images %}
+            {% for item_image in item.images %}
               <div class="carousel-item {{ loop.first ? 'active' : '' }}">
                 <img src="/images/items/{{ item_image.filename }}" class="d-block w-100">
               </div>
