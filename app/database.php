@@ -52,8 +52,9 @@ class Database extends PDO
         $items = [];
         foreach ($item_ids as $item_id) {
             $stmt->execute([$item_id]);
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $items[] = $row;
+            $item = $stmt->fetch(PDO::FETCH_ASSOC);
+            $item['images'] = $this->get_item_images($item['id']);
+            $items[] = $item;
         }
         return $items;
     }
