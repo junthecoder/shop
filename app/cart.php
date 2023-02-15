@@ -26,7 +26,7 @@ if ($_POST) {
         switch ($_POST['action']) {
             case 'add':
                 $key = find_cart_item_key_by_id($_POST['item_id']);
-                $count = $_POST['count'] ?? 0;
+                $count = $_POST['count'] ?? 1;
                 if ($key === false) {
                     $_SESSION['cart'][] = ['id' => $_POST['item_id'], 'count' => $count];
                 } else {
