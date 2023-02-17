@@ -17,9 +17,8 @@ foreach ($_SESSION['cart'] as $cart_item) {
     $items[$cart_item['id']] = $db->get_item_by_id($cart_item['id']);
 }
 
-if (!isset($_POST['action'])) {
-    $_POST['action'] = 'default';
-}
+$_POST['action'] ??= 'default';
+
 if ($_POST['action'] == 'confirm') {
     $stmt = $db->prepare('INSERT INTO purchase (user_id, address_id) VALUES (?, ?)');
     $stmt->execute([$_SESSION['user']['id'], $_POST['address_id']]);

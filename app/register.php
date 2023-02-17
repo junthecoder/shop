@@ -5,10 +5,10 @@ require_once 'database.php';
 
 session_start();
 
-default_value($_POST, 'name', '');
-default_value($_POST, 'email', '');
-default_value($_POST, 'password', '');
-default_value($_POST, 'password-check', '');
+$_POST['name'] ??= '';
+$_POST['email'] ??= '';
+$_POST['password'] ??= '';
+$_POST['password-check'] ??= '';
 
 if (isset($_POST['check'])) {
     $_SESSION['post'] = $_POST;
@@ -23,7 +23,7 @@ if (isset($_POST['register'])) {
 $check = isset($_GET['check']);
 $register = isset($_GET['register']);
 
-$post = isset($_SESSION['post']) ? $_SESSION['post'] : [];
+$post = $_SESSION['post'] ?? [];
 
 if ($register) {
     $db = new Database;

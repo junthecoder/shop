@@ -7,9 +7,7 @@ session_start();
 
 $db = new Database;
 
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
-}
+$_SESSION['cart'] ??= [];
 
 function find_cart_item_key_by_id($id)
 {
