@@ -4,6 +4,5 @@ const formatter = new Intl.NumberFormat('ja-JP', {
 });
 
 $('.price').each((_, x) => {
-  console.log('here');
   $(x).text(formatter.format($(x).text()));
 });
