@@ -47,7 +47,6 @@ function concat_address($a)
     );
 }
 
-$db = new Database;
 $addresses = $db->get_addresses($_SESSION['user']['id']);
 $default_address_id = $db->get_default_address_id($_SESSION['user']['id']);
 
