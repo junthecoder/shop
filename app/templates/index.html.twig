@@ -22,7 +22,7 @@
           <div class="card" style="width: 12rem;">
               <a href="/item.php?id={{ item.id }}">
                 {% set image_path = (item.images is empty) ? '/images/200x200.png' : '/images/items/' ~ item.images[0].filename %}
-                <img src="{{ image_path }}" class="card-img-top" alt="{{ item.name }}?>">
+                <img src="{{ image_path }}" class="card-img-top" alt="{{ item.name }}">
               </a>
             <div class="card-body" style="height: 140px;">
               <a href="/item.php?id={{ item.id }}">
