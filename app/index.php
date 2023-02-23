@@ -21,10 +21,10 @@ switch ($sort_type) {
         $order = 'price DESC';
         break;
     case 'date-asc':
-        $order = 'time_created';
+        $order = 'time_created, id';
         break;
     case 'date-desc':
-        $order = 'time_created DESC';
+        $order = 'time_created DESC, id DESC';
         break;
     case 'recommended':
     default:
