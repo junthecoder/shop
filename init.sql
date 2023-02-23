@@ -1,3 +1,7 @@
+# CREATE DATABASE shop
+#     CHARACTER SET utf8mb4
+#     COLLATE utf8mb4_general_ci;
+
 CREATE TABLE item (
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     name NVARCHAR(128),
