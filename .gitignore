@@ -6,6 +6,7 @@ composer.phar
 /cache/
 
 # shop
+.env
 /mysql/
 /items.sql
-.env
+/public/images/items/
