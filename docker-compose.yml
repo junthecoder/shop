@@ -7,7 +7,7 @@ services:
     environment:
       - ALLOW_OVERRIDE=true
     ports:
-      - "80:80"
+      - "8001:80"
     links:
       - db
     volumes:
