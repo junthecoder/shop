@@ -1,8 +1,1 @@
-# Composer
-composer.phar
-/vendor/
-
-# Twig
-/cache/
-
 /images/items/

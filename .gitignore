@@ -1,2 +1,10 @@
+# Composer
+composer.phar
+/vendor/
+
+# Twig
+/cache/
+
+# shop
 /mysql/
 /items.sql
