@@ -23,11 +23,10 @@ $register = isset($_GET['register']);
 $post = $_SESSION['post'] ?? [];
 
 if ($register) {
-    $db = new Database;
-    $db->add_user($post['name'], $post['email'], $post['password']);
+    DB->add_user($post['name'], $post['email'], $post['password']);
 
     session_regenerate_id(true);
-    $_SESSION['user'] = $db->get_user($post['email']);
+    $_SESSION['user'] = DB->get_user($post['email']);
     redirect('/');
 }
 

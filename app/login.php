@@ -5,8 +5,7 @@ require_once 'init.php';
 $success = false;
 
 if ($_POST) {
-    $db = new Database;
-    $row = $db->get_user($_POST['email']);
+    $row = DB->get_user($_POST['email']);
     $success = ($row !== false and password_verify($_POST['password'], $row['password']));
     if ($success) {
         session_regenerate_id(true);

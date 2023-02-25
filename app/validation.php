@@ -8,8 +8,7 @@ function validate_email($email)
         return ['メールアドレスを入力してください'];
     }
 
-    $db = new Database;
-    $stmt = $db->prepare('SELECT 1 FROM user WHERE email = ?');
+    $stmt = DB->prepare('SELECT 1 FROM user WHERE email = ?');
     $stmt->execute([$email]);
     if ($stmt->fetch(PDO::FETCH_ASSOC) !== false) {
         return ['このメールアドレスは登録できません'];

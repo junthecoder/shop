@@ -4,8 +4,7 @@ require_once 'init.php';
 
 ensure_login();
 
-$db = new Database;
-$purchases = $db->get_purchases($_SESSION['user']['id']);
+$purchases = DB->get_purchases($_SESSION['user']['id']);
 
 foreach ($purchases as $key => $purchase) {
     $purchases[$key]['purchase_time'] = date("Y年m月d日", strtotime($purchase['purchase_time']));

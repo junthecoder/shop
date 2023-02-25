@@ -9,19 +9,16 @@ if (isset($_POST['cancel_button'])) {
 }
 
 if (isset($_POST['save_button'])) {
-    $db = new Database;
     if (isset($_POST['id'])) {
-        $db->update_address($_POST['id'], $_POST);
+        DB->update_address($_POST['id'], $_POST);
     } else {
-        $db->add_address($_SESSION['user']['id'], $_POST);
+        DB->add_address($_SESSION['user']['id'], $_POST);
     }
     redirect('/addresses');
 }
 
-$db = new Database;
-
 if (isset($_GET['id'])) {
-    $address = $db->get_address($_GET['id']);
+    $address = DB->get_address($_GET['id']);
     if ($address === false) {
         die("住所のIDが不正です。");
     }
@@ -39,7 +36,7 @@ if (isset($_GET['id'])) {
     ];
 }
 
-$prefectures = $db->get_prefectures();
+$prefectures = DB->get_prefectures();
 
 echo load_twig()->render('address_edit.html.twig', [
     'prefectures' => $prefectures,

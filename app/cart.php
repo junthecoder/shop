@@ -2,8 +2,6 @@
 
 require_once 'init.php';
 
-$db = new Database;
-
 $_SESSION['cart'] ??= [];
 
 function find_cart_item_key_by_id($id)
@@ -42,5 +40,5 @@ if ($_POST) {
 }
 
 echo load_twig()->render('cart.html.twig', [
-    'items' => $db->get_items_in_cart(),
+    'items' => DB->get_items_in_cart(),
 ]);
