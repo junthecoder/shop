@@ -18,7 +18,7 @@
                   </div>
                   <div class="col-6 text-end">
                     <div>合計</div>
-                    <div class="price">{{ purchase.total }}</div>
+                    <div class="price">{{ format_price(purchase.total) }}</div>
                   </div>
                 </div>
               </div>
@@ -40,7 +40,7 @@
                     <p class="card-text">数量: {{ item.count }}</p>
                   </div>
                   <div class="col-4">
-                    <p class="card-text text-end price">{{ item.price * item.count }}</p>
+                    <p class="card-text text-end price">{{ format_price(item.price * item.count) }}</p>
                   </div>
                 </div>
               {% endfor %}

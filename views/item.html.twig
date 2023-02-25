@@ -50,7 +50,7 @@
         {{ csrf_protection() }}
         <input type="hidden" name="action" value="add">
         <input type="hidden" name="item_id" value="{{ item.id }}">
-        <div class="fs-4 mb-3 price" style="color: #ff0072;">{{ item.price }}</div>
+        <div class="fs-4 mb-3 price" style="color: #ff0072;">{{ format_price(item.price) }}</div>
         <input class="form-control my-3" name="count" type="number" min="1" step="1" value="1" style="width: 100px;">
         <button type="submit" class="btn btn-warning mx-auto my-2">カートに入れる</button>
       </form>

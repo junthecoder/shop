@@ -15,7 +15,7 @@
               <a href="/item?id={{ item.id }}">
                 <h5 class="card-title">{{ item.name }}</h5>
               </a>
-              <p class="price">{{ item.price * cart_item.count }}</p>
+              <p class="price">{{ format_price(item.price * cart_item.count) }}</p>
             </div>
             {% if count_changeable %}
               <form action="/cart" method="post">
@@ -52,7 +52,7 @@
     {% endfor %}
     <div class="fs-5 px-2 py-3 text-end">
       <span>小計</span>
-      <span class="price">{{ total_price }}</span>
+      <span class="price">{{ format_price(total_price) }}</span>
     </div>
   </div>
 </div>

@@ -44,10 +44,17 @@ function load_twig()
         'cache' => __DIR__ . '/../../cache',
         'auto_reload' => true,
     ]);
+
     $twig->addGlobal('session', $_SESSION);
+
     $twig->addFunction(new \Twig\TwigFunction('csrf_protection', function () {
         $_SESSION['token'] ??= bin2hex(random_bytes(32));
         echo '<input type="hidden" name="token" value="' . $_SESSION['token'] . '" />';
+    }));
+
+    $twig->addFunction(new \Twig\TwigFunction('format_price', function ($price) {
+        static $fmt = new NumberFormatter('ja_JP', NumberFormatter::CURRENCY);
+        return $fmt->formatCurrency($price, 'JPY');
     }));
 
     return $twig;

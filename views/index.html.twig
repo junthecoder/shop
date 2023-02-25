@@ -28,7 +28,7 @@
               <a href="/item?id={{ item.id }}">
                 <h6 class="card-title">{{ item.name }}</h6>
               </a>
-              <p class="card-text price">{{ item.price }}</p>
+              <p class="card-text price">{{ format_price(item.price) }}</p>
             </div>
             <form action="/cart" method="post">
               {{ csrf_protection() }}
