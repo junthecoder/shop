@@ -1,0 +1,22 @@
+{
+  "name": "shop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch-sass": "sass --watch public/styles/main.scss:public/styles/main.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junthecoder/shop.git"
+  },
+  "author": "junthecoder",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/junthecoder/shop/issues"
+  },
+  "homepage": "https://github.com/junthecoder/shop#readme",
+  "devDependencies": {
+    "sass": "^1.58.3"
+  }
+}
