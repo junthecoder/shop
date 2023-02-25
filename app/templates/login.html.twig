@@ -12,6 +12,7 @@
       <p><a href="/">トップページへ</a></p>
     {% else %}
       <form class="container p-5" style="width: 350px;" action="login.php" method="post">
+        {{ csrf_protection() }}
         <div class="row mb-4">
           <h3>ログイン</h3>
         </div>

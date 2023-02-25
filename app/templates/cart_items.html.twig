@@ -19,6 +19,7 @@
             </div>
             {% if count_changeable %}
               <form action="cart.php" method="post">
+                {{ csrf_protection() }}
                 <input type="hidden" name="action" value="change_count">
                 <input type="hidden" name="item_id" value="{{ cart_item.id }}">
                 <select name="count" class="form-select form-select-sm" style="width: 5em" onchange="this.form.submit()">
@@ -38,6 +39,7 @@
             {% if deletable %}
               <div class="float-end">
                 <form action="cart.php" method="post">
+                  {{ csrf_protection() }}
                   <input type="hidden" name="action" value="delete">
                   <input type="hidden" name="item_id" value="{{ item.id }}">
                   <button type="submit" class="btn btn-danger">削除</button>

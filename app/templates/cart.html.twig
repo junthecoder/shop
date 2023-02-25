@@ -14,6 +14,7 @@
       {% include 'cart_items.html.twig' with {'deletable': true, 'count_changeable': true} %}
       <div class="row p-2 float-end">
         <form action="checkout.php" method="post">
+          {{ csrf_protection() }}
           <input type="hidden" name="action" value="default">
           <button type="submit" class="btn btn-warning py-2">レジに進む</button>
         </form>

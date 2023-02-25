@@ -31,6 +31,7 @@
               <p class="card-text price">{{ item.price }}</p>
             </div>
             <form action="cart.php" method="post">
+              {{ csrf_protection() }}
               <input type="hidden" name="action" value="add">
               <input type="hidden" name="item_id" value="{{ item.id }}">
               <div class="container">

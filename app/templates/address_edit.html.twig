@@ -6,6 +6,7 @@
 {% block body %}
   <div class="container p-4">
     <form action="address_edit.php" method="post">
+      {{ csrf_protection() }}
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="full_name_input" placeholder="氏名" name="full_name" value="{{ address.full_name }}">
         <label for="full_name_input">氏名</label>

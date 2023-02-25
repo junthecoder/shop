@@ -1,9 +1,7 @@
 <?php
 
-require_once 'utility.php';
-require_once 'database.php';
+require_once 'init.php';
 
-session_start();
 ensure_login();
 
 if (empty($_SESSION['cart'])) {

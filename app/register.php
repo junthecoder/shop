@@ -1,9 +1,6 @@
 <?php
 
-require_once 'utility.php';
-require_once 'database.php';
-
-session_start();
+require_once 'init.php';
 
 $_POST['name'] ??= '';
 $_POST['email'] ??= '';

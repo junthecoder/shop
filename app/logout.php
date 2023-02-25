@@ -1,8 +1,6 @@
 <?php
 
-require_once 'utility.php';
-
-session_start();
+require_once 'init.php';
 
 if (isset($_SESSION['user'])) {
     $_SESSION = [];
