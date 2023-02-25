@@ -28,13 +28,13 @@
               {% for item in purchase.items %}
                 <div class="row row-cols-auto py-1">
                   <div class="col-4">
-                    <a href="/item.php?id={{ item.id }}">
+                    <a href="/item?id={{ item.id }}">
                       {% set image_path = (item.images is empty) ? '/images/200x200.png' : '/images/items/' ~ item.images[0].filename %}
                       <img src="{{ image_path }}" class="rounded" alt="{{ item.name }}" style="width: 120px; height: 120px">
                     </a>
                   </div>
                   <div class="col-4">
-                    <a href="/item.php?id={{ item.id }}">
+                    <a href="/item?id={{ item.id }}">
                       <h6 class="card-text">{{ item.name }}</h6>
                     </a>
                     <p class="card-text">数量: {{ item.count }}</p>

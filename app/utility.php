@@ -18,7 +18,7 @@ function redirect($url = null, $add_to_history = true)
 function ensure_login()
 {
     if (!isset($_SESSION['user'])) {
-        header('Location: login.php');
+        header('Location: /login');
     }
 }
 

@@ -9,12 +9,12 @@ $_POST['password-check'] ??= '';
 
 if (isset($_POST['check'])) {
     $_SESSION['post'] = $_POST;
-    redirect('register.php?check');
+    redirect('/register?check');
 }
 
 if (isset($_POST['register'])) {
     $_SESSION['post'] = $_POST;
-    redirect('register.php?register');
+    redirect('/register?register');
 }
 
 $check = isset($_GET['check']);
@@ -28,7 +28,7 @@ if ($register) {
 
     session_regenerate_id(true);
     $_SESSION['user'] = $db->get_user($post['email']);
-    redirect('index.php');
+    redirect('/');
 }
 
 echo load_twig()->render('register.html.twig', [

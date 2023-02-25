@@ -5,7 +5,7 @@ require_once 'init.php';
 ensure_login();
 
 if (empty($_SESSION['cart'])) {
-    redirect('cart.php');
+    redirect('/cart');
 }
 
 $db = new Database;

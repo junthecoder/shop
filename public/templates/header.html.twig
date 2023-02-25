@@ -9,18 +9,18 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           {% if session.user is defined %}
             <li class="nav-item">
-              <a class="nav-link" href="account.php">{{ session.user.name }} さん</a>
+              <a class="nav-link" href="/account">{{ session.user.name }} さん</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="logout.php">ログアウト</a>
+              <a class="nav-link" href="/logout">ログアウト</a>
             </li>
           {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="login.php">ログイン</a>
+              <a class="nav-link" href="/login">ログイン</a>
             </li>
           {% endif %}
           <li class="nav-item">
-            <a class="nav-link" href="cart.php">
+            <a class="nav-link" href="/cart">
               カート
               {% if not session.cart is empty %}
                 {% set num_cart_items = session.cart | reduce((n, item) => n + item.count) %}

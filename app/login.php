@@ -11,7 +11,7 @@ if ($_POST) {
     if ($success) {
         session_regenerate_id(true);
         $_SESSION['user'] = $row;
-        redirect($_POST['redirect_url'] ?? 'index.php');
+        redirect($_POST['redirect_url'] ?? '/');
     } else {
         redirect(add_to_history: false);
     }

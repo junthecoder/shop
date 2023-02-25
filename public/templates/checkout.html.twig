@@ -16,7 +16,7 @@
       {% if session.cart is empty %}
         <p>カートに商品はありません</p>
       {% else %}
-        <form action="checkout.php" method="post">
+        <form action="/checkout" method="post">
           {{ csrf_protection() }}
           {% include 'cart_items.html.twig' with {'deletable': false, 'count_changeable': false} %}
           {% for address in addresses %}

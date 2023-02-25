@@ -5,7 +5,7 @@ require_once 'init.php';
 ensure_login();
 
 if (isset($_POST['cancel_button'])) {
-    redirect('addresses.php');
+    redirect('/addresses');
 }
 
 if (isset($_POST['save_button'])) {
@@ -15,7 +15,7 @@ if (isset($_POST['save_button'])) {
     } else {
         $db->add_address($_SESSION['user']['id'], $_POST);
     }
-    redirect('addresses.php');
+    redirect('/addresses');
 }
 
 $db = new Database;

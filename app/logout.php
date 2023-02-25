@@ -8,7 +8,7 @@ if (isset($_SESSION['user'])) {
         setcookie(session_name(), '', time() - 2592000, '/');
     }
     session_destroy();
-    redirect('index.php');
+    redirect('/');
 }
 
 echo load_twig()->render('logout.html.twig');

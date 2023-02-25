@@ -46,7 +46,7 @@
           {{ item.description | nl2br }}
         </div>
       </div>
-      <form action="cart.php" method="post" class="col col-md-auto">
+      <form action="/cart" method="post" class="col col-md-auto">
         {{ csrf_protection() }}
         <input type="hidden" name="action" value="add">
         <input type="hidden" name="item_id" value="{{ item.id }}">

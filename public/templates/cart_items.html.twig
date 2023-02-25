@@ -6,19 +6,19 @@
       {% set total_price = total_price + item.price * cart_item.count %}
       <div class="card">
         <div class="d-flex justify-content-between">
-          <a href="/item.php?id={{ item.id }}">
+          <a href="/item?id={{ item.id }}">
             {% set image_path = (item.images is empty) ? '/images/200x200.png' : '/images/items/' ~ item.images[0].filename %}
             <img src="{{ image_path }}" class="card-img-left" alt="{{ item.name }}" style="width: 160px; height: 160px">
           </a>
           <div class="card-body">
             <div class="d-flex justify-content-between">
-              <a href="/item.php?id={{ item.id }}">
+              <a href="/item?id={{ item.id }}">
                 <h5 class="card-title">{{ item.name }}</h5>
               </a>
               <p class="price">{{ item.price * cart_item.count }}</p>
             </div>
             {% if count_changeable %}
-              <form action="cart.php" method="post">
+              <form action="/cart" method="post">
                 {{ csrf_protection() }}
                 <input type="hidden" name="action" value="change_count">
                 <input type="hidden" name="item_id" value="{{ cart_item.id }}">
@@ -38,7 +38,7 @@
             {% endif %}
             {% if deletable %}
               <div class="float-end">
-                <form action="cart.php" method="post">
+                <form action="/cart" method="post">
                   {{ csrf_protection() }}
                   <input type="hidden" name="action" value="delete">
                   <input type="hidden" name="item_id" value="{{ item.id }}">

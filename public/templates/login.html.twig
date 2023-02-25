@@ -11,7 +11,7 @@
       <p>ログインしました</p>
       <p><a href="/">トップページへ</a></p>
     {% else %}
-      <form class="container p-5" style="width: 350px;" action="login.php" method="post">
+      <form class="container p-5" style="width: 350px;" action="/login" method="post">
         {{ csrf_protection() }}
         <div class="row mb-4">
           <h3>ログイン</h3>
@@ -31,7 +31,7 @@
       </form>
       <div class="container px-5" style="width: 350px;">
         <div class="row">
-          <a href="register.php" class="btn btn-secondary">アカウントを作成する</a>
+          <a href="/register" class="btn btn-secondary">アカウントを作成する</a>
         </div>
       </form>
     {% endif %}

@@ -1,39 +1,45 @@
 <?php
 
-require_once 'init.php';
+$dir = '../app';
 
-$db = new Database;
-
-$num_items_per_page = 10;
-$num_items = $db->count_items();
-$num_pages = ceil($num_items / $num_items_per_page);
-$current_page = $_GET['page'] ?? 1;
-$sort_type = $_GET['sort'] ?? 'recommended';
-
-switch ($sort_type) {
-    case 'price-asc':
-        $order = 'price';
+switch (strtok($_SERVER['REQUEST_URI'], '?')) {
+    case '/':
+        include "$dir/index.php";
         break;
-    case 'price-desc':
-        $order = 'price DESC';
+    case '/account':
+        include "$dir/account.php";
         break;
-    case 'date-asc':
-        $order = 'time_created, id';
+    case '/address_edit':
+        include "$dir/address_edit.php";
         break;
-    case 'date-desc':
-        $order = 'time_created DESC, id DESC';
+    case '/addresses':
+        include "$dir/addresses.php";
         break;
-    case 'recommended':
+    case '/cart':
+        include "$dir/cart.php";
+        break;
+    case '/checkout':
+        include "$dir/checkout.php";
+        break;
+    case '/item':
+        include "$dir/item.php";
+        break;
+    case '/login':
+        include "$dir/login.php";
+        break;
+    case '/logout':
+        include "$dir/logout.php";
+        break;
+    case '/orders':
+        include "$dir/orders.php";
+        break;
+    case '/register':
+        include "$dir/register.php";
+        break;
+    case '/validation':
+        include "$dir/validation.php";
+        break;
     default:
-        $order = 'id';
+        http_response_code(404);
         break;
 }
-$items = $db->get_items_batch($num_items_per_page * ($current_page - 1), $num_items_per_page, $order);
-
-echo load_twig()->render('index.html.twig', [
-    'items' => $items,
-    'num_items_per_page' => $num_items_per_page,
-    'num_pages' => $num_pages,
-    'current_page' => $current_page,
-    'sort_type' => $sort_type,
-]);

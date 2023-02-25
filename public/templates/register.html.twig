@@ -8,7 +8,7 @@
       <p>ユーザ登録を完了しました。</p>
       <a href="/">トップページへ</a>
     {% else %}
-      <form class="container p-5 needs-validation" action="register.php" method="post" id="registration-form" novalidate>
+      <form class="container p-5 needs-validation" action="/register" method="post" id="registration-form" novalidate>
         {{ csrf_protection() }}
         <div class="row mb-4">
           <h3>ユーザ登録</h3>
