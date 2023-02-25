@@ -31,6 +31,7 @@ function block_csrf()
     if (!isset($_POST['token']) or
         !isset($_SESSION['token']) or
         !hash_equals($_POST['token'], $_SESSION['token'])) {
+        http_response_code(403);
         die('Form expired.');
     }
 }
