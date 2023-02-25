@@ -40,7 +40,7 @@ function load_twig()
 {
     $loader = new \Twig\Loader\FilesystemLoader('../views');
     $twig = new \Twig\Environment($loader, [
-        'cache' => '../cache',
+        'cache' => __DIR__ . '/../cache',
         'auto_reload' => true,
     ]);
     $twig->addGlobal('session', $_SESSION);
