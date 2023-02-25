@@ -40,7 +40,8 @@ function load_twig()
 {
     $loader = new \Twig\Loader\FilesystemLoader('../views');
     $twig = new \Twig\Environment($loader, [
-        'cache' => __DIR__ . '/../cache',
+         # use /var/www/html/cache since directories mounted by docker are owned by root
+        'cache' => __DIR__ . '/../../cache',
         'auto_reload' => true,
     ]);
     $twig->addGlobal('session', $_SESSION);
