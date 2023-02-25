@@ -265,6 +265,7 @@ class Database extends PDO
             EOT);
             $stmt->execute([$purchase['id']]);
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $row['images'] = $this->get_item_images($row['id']);
                 $purchases[$key]['items'][] = $row;
             }
         }
