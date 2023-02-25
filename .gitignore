@@ -14,3 +14,4 @@ npm-debug.log
 /mysql/
 /items.sql
 /public/images/items/
+/public/styles/
