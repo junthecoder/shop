@@ -2,7 +2,7 @@
 
 class Database extends PDO
 {
-    public function __construct($dbname, $host, $user, $pass)
+    public function __construct($host, $user, $pass, $dbname)
     {
         parent::__construct(
             "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
