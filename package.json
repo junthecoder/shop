@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "sass":       "sass styles/:public/styles/",
     "watch-sass": "sass --watch styles/:public/styles/"
   },
   "repository": {
