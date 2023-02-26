@@ -46,6 +46,7 @@ function load_twig()
     ]);
 
     $twig->addGlobal('session', $_SESSION);
+    $twig->addGlobal('app_name', $_ENV['APP_NAME']);
 
     $twig->addFunction(new \Twig\TwigFunction('csrf_protection', function () {
         $_SESSION['token'] ??= bin2hex(random_bytes(32));
