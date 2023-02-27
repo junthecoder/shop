@@ -17,7 +17,7 @@ $_POST['action'] ??= 'default';
 
 if ($_POST['action'] == 'confirm') {
     $stmt = DB->prepare('INSERT INTO purchase (user_id, address_id) VALUES (?, ?)');
-    $stmt->execute([$_SESSION['user']['id'], $_POST['address_id']]);
+    $stmt->execute([$_SESSION['user']['id'], $_POST['address_id'] ?? null]);
     $purchase_id = DB->lastInsertId();
 
     $stmt = DB->prepare('INSERT INTO purchase_item (purchase_id, item_id, count) VALUES (?, ?, ?)');
